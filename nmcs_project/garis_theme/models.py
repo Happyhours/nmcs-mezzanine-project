@@ -18,6 +18,10 @@ class HomePage(Page, RichText):
     subheading = models.CharField(max_length=200, blank=True,
         help_text="Optional subheading for HomePage")
 
+    class Meta:
+        verbose_name = _("Home page")
+        verbose_name_plural = _("Home pages")
+
     def __str__(self):
         return self.heading
 
