@@ -29,9 +29,11 @@
 {% endifinstalled %}
 
 {% compress css %}
+<!--
 <link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
 <link rel="stylesheet" href="{% static "css/mezzanine.css" %}">
 <link rel="stylesheet" href="{% static "css/bootstrap-theme.css" %}">
+-->
 {% if LANGUAGE_BIDI %}
 <link rel="stylesheet" href="{% static "css/rtl.css" %}">
 {% endif %}
@@ -61,9 +63,11 @@
 {% endcompress %}
 
 {% compress js %}
+<!--
 <script src="{% static "mezzanine/js/"|add:settings.JQUERY_FILENAME %}"></script>
 <script src="{% static "js/bootstrap.js" %}"></script>
 <script src="{% static "js/bootstrap-extras.js" %}"></script>
+-->
 {% block extra_js %}
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -105,51 +109,38 @@
 {% block extra_head %}{% endblock %}
 </head>
 
-<body id="{% block body_id %}body{% endblock %}">
+<body id="{% block body_id %}body{% endblock %}" data-spy="scroll">
 
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-<div class="container">
-<div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">{% trans "Toggle Navigation" %}</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-    </button>
-    {% if settings.SITE_TITLE %}<a class="navbar-brand" href="/">{{ settings.SITE_TITLE }}</a>{% endif %}
-    {% if settings.SITE_TAGLINE %}<p class="navbar-text visible-lg">{{ settings.SITE_TAGLINE }}</p>{% endif %}
-</div>
-<div class="navbar-collapse collapse">
-    {% search_form "all" %}
-    {% page_menu "pages/menus/dropdown.html" %}
-</div>
-</div>
-</div>
+    <div id="loader"></div>
+    <div id="main-wrapper">
+        <div id="sidebar">
+            <nav class="navbar navbar-default" role="navigation">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">{% trans "Toggle Navigation" %}</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">
+                        <div class="company-name">
+                            NILSSONS
+                            <br>MC
+                            <br>SHOP
+                        </div>
+                    </a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    {% page_menu "pages/menus/dropdown.html" %}
+                </div>
+                <!-- /.navbar-collapse -->
+            </nav>
+        </div><!-- END SIDEBAR -->
+    </div><!-- END MAIN-WRAPPER -->
 
-<div class="container">
 
-{% nevercache %}
-{% if messages %}
-<div class="messages">
-{% for message in messages %}
-<div class="alert alert-dismissable alert-{{ message.tags }}" data-alert="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{ message }}
-</div>
-{% endfor %}
-</div>
-{% endif %}
-{% endnevercache %}
-
-<h1>{% block title %}{% endblock %}</h1>
-
-<ul class="breadcrumb">
-{% spaceless %}
-{% block breadcrumb_menu %}{% page_menu "pages/menus/breadcrumb.html" %}{% endblock %}
-{% endspaceless %}
-</ul>
-
-</div>
 
 <div class="container">
 <div class="row">
