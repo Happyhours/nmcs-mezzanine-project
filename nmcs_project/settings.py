@@ -94,7 +94,12 @@ MANAGERS = ADMINS
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = []
+# Example (From Django documentation):
+ALLOWED_HOSTS = [
+    '.example.com',  # Allow domain and subdomains
+    '.example.com.', # Also allow FQDN and subdomains
+]
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -103,7 +108,7 @@ ALLOWED_HOSTS = []
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = None
+TIME_ZONE = 'Europe/Stockholm'
 
 # If you set this to True, Django will use timezone-aware datetimes.
 USE_TZ = True
