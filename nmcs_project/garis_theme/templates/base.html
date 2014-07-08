@@ -1,9 +1,8 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %}>
 {% load pages_tags mezzanine_tags i18n future staticfiles %}
 
 <head>
-
     <!-- GARIS THEME -->
     <!-- PACE Loader -->
     <script src="{% static 'js/lib/pace.min.js' %}"></script>
@@ -16,7 +15,9 @@
 <meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
 <meta name="description" content="{% block meta_description %}{% endblock %}">
 <title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
+<!--
 <link rel="shortcut icon" href="{% static "img/favicon.ico" %}">
+-->
 
     <!-- GARIS THEME -->
     <link rel="shortcut icon" href="{% static 'images/favicon/favicon.ico' %}" type="image/x-icon">
@@ -62,6 +63,79 @@
 {% endblock %}
 {% endcompress %}
 
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+{% block extra_head %}{% endblock %}
+</head>
+
+<body id="{% block body_id %}body{% endblock %}" data-spy="scroll">
+
+    <div id="loader"></div>
+    <div id="main-wrapper">
+        <div id="sidebar">
+            <nav class="navbar navbar-default" role="navigation">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">{% trans "Toggle Navigation" %}</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">
+                        <div class="company-name">
+                            NILSSONS
+                            <br>MC
+                            <br>SHOP
+                        </div>
+                    </a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    {% page_menu "pages/menus/dropdown.html" %}
+                </div>
+                <!-- /.navbar-collapse -->
+            </nav>
+        </div><!-- END SIDEBAR -->
+
+        <div id="container">
+
+            {% block main %}
+            {% endblock %}
+
+            <!-- BEGIN FOOTER -->
+            <footer>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-4">
+                      CERTIFIED
+                    </div>
+                    <div class="col-md-4">
+                      CONTACTS
+                    </div>
+                    <div class="col-md-4">
+                      OPENTIMES
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  PARTNERS
+                </div>
+                <div class="col-md-12">
+                  {% page_menu "pages/menus/footer.html" %}
+                </div>
+              </div>
+            </footer>
+            <!-- END FOOTER -->
+        </div><!-- END CONTAINER -->
+    </div><!-- END MAIN-WRAPPER -->
+
+
 {% compress js %}
 <!--
 <script src="{% static "mezzanine/js/"|add:settings.JQUERY_FILENAME %}"></script>
@@ -100,93 +174,6 @@
     <script src="{% static 'js/main.js' %}"></script>
 {% endblock %}
 {% endcompress %}
-
-<!--[if lt IE 9]>
-<script src="{% static "js/html5shiv.js" %}"></script>
-<script src="{% static "js/respond.min.js" %}"></script>
-<![endif]-->
-
-{% block extra_head %}{% endblock %}
-</head>
-
-<body data-spy="scroll">
-
-    <div id="loader"></div>
-    <div id="main-wrapper">
-        <div id="sidebar">
-            <nav class="navbar navbar-default" role="navigation">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">{% trans "Toggle Navigation" %}</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/">
-                        <div class="company-name">
-                            NILSSONS
-                            <br>MC
-                            <br>SHOP
-                        </div>
-                    </a>
-                </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="active">
-                      <!-- <a class="sscroll" href="#home">Home</a> -->
-                      <a href="">Home</a>
-                    </li>
-                    <li>
-                      <!-- <a class="sscroll" href="#services">Services</a> -->
-                      <a href="">Services</a>
-                    </li>
-                    <li>
-                      <!-- <a class="sscroll" href="#about">About</a> -->
-                      <a href="">About</a>
-                    </li>
-                    <li>
-                      <!-- <a class="sscroll" href="#contact">Contact</a> -->
-                      <a href="">Contact</a>
-                    </li>
-                </ul>
-                </div>
-                <!-- /.navbar-collapse -->
-            </nav>
-        </div><!-- END SIDEBAR -->
-
-        <div class="container">
-            {% block main %}
-            {% endblock %}
-            <!-- BEGIN FOOTER -->
-            <footer>
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="row">
-                    <div class="col-md-4">
-                      CERTIFIED
-                    </div>
-                    <div class="col-md-4">
-                      CONTACTS
-                    </div>
-                    <div class="col-md-4">
-                      OPENTIMES
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  PARTNERS
-                </div>
-                <div class="col-md-12">
-                  {% page_menu "pages/menus/footer.html" %}
-                </div>
-              </div>
-            </footer>
-            <!-- END FOOTER -->
-        </div><!-- END CONTAINER -->
-    </div><!-- END MAIN-WRAPPER -->
-
 {% include "includes/footer_scripts.html" %}
 
 </body>
