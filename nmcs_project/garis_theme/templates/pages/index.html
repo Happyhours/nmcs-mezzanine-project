@@ -1,0 +1,30 @@
+{% extends "pages/page.html" %}
+
+{% load mezzanine_tags staticfiles %}
+
+
+{% block main %}
+<!-- BEGIN HOME -->
+<section class="call-ta">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="row">
+                <h2>
+                    {{ page.homepage.heading }}
+                    <span>
+                        {{ page.homepage.subheading }}
+                    </span>
+                </h2>               
+            </div>            
+        </div>
+        <div class="col-sm-8">
+            <a href="{{ home.first.link }}">
+                <img class="img-responsive img-thumbnail" src="{{ home.first.image.url }}" alt="action-image">
+            </a>
+        </div>
+    </div>
+</section>
+<!-- END HOME -->
+{% endblock %}
+
+
