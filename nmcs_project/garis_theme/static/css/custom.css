@@ -1,0 +1,118 @@
+/* COMPANY NAME CSS */
+.company-name {
+    padding-left: 4px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 200;
+    font-size: 24px;
+    color: #FFF;
+    line-height: 1.2;
+}
+
+.navbar-brand {
+    height: 110px;
+}
+
+/* FOOTER CSS */
+
+.certified-image-wrapper {
+    /*max-height: 740px;*/
+    max-height: 200px;
+    max-width: 200px;
+}
+
+footer .client-slider {
+    list-style: none;
+    padding-left: 0;
+    position: relative;
+    display: block;
+    margin: 0 auto;
+}
+footer .client-slider li {
+    margin: 5px 5px;
+    display: inline-block;
+}
+
+footer address strong {
+    display: inline-block;
+    width: 66px;
+}
+
+footer address {
+    margin-bottom: 2px;
+}
+
+footer p {
+    font-size: 14px;
+    text-align: left;
+}
+
+/* CRISPYFORMS CSS */
+
+.asteriskField {
+    display: none;
+}
+
+ /* CUSTOM TABLE CSS */
+
+.borderless  > tbody > tr > td {
+  border: none;
+}
+
+.borderless>thead>tr>th, 
+.borderless>tbody>tr>th, 
+.borderless>tfoot>tr>th, 
+.borderless>thead>tr>td, 
+.borderless>tbody>tr>td, 
+.borderless>tfoot>tr>td {
+    padding: 0 0 0 0;
+}
+
+
+/* DEBUG 
+
+.container {
+    border: 2px solid purple;
+}
+.row {
+    border: 2px solid red;
+}
+.col-md-1 {
+    border: 2px solid green;
+}
+.col-md-2 {
+    border: 2px solid green;
+}
+.col-md-3 {
+    border: 2px solid green;
+}
+.col-md-4 {
+    border: 2px solid green;
+}
+.col-md-5 {
+    border: 2px solid green;
+}
+.col-md-6 {
+    border: 2px solid green;
+}
+.col-md-7 {
+    border: 2px solid green;
+}
+.col-md-8 {
+    border: 2px solid green;
+}
+.col-md-9 {
+    border: 2px solid green;
+}
+.col-md-10 {
+    border: 2px solid green;
+}
+.col-md-11 {
+    border: 2px solid green;
+}
+.col-md-12 {
+    border: 2px solid green;
+}
+
+*/
+
+/* END OF DEBUG */
