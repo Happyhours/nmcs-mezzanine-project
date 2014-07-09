@@ -89,11 +89,11 @@ dp(document).ready(function() {
         map: {
             options: {
                 center: [lats, lngs],
-                zoom: 15,
+                zoom: 14,
                 mapTypeId: "style1",
                 navigationControl: 0,
                 scrollwheel: false,
-                zoomControl: 0,
+                zoomControl: true,
                 disableDefaultUI: true,
                 streetViewControl: 0,
                 draggable: 0,
@@ -139,7 +139,7 @@ dp(document).ready(function() {
                 }, {
                     gamma: 1
                 }, {
-                    visibility: "simplified"
+                    /*visibility: "simplified"*/
                 }]
             }, {
                 featureType: "road.local",
@@ -182,7 +182,7 @@ dp(document).ready(function() {
                 featureType: "road",
                 elementType: "labels",
                 stylers: [{
-                    visibility: "off"
+                    /*visibility: "off"*/
                 }]
             }]
         },
@@ -191,7 +191,7 @@ dp(document).ready(function() {
                 latLng: [lats, lngs],
                 data: data_address,
                 options: {
-                    icon: "images/map-marker.png"
+                    /*icon: "images/map-marker.png"*/
                 }
             }],
             options: {

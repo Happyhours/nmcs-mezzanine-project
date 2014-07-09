@@ -256,7 +256,11 @@ INSTALLED_APPS = (
     "mezzanine.twitter",
     #"mezzanine.accounts",
     #"mezzanine.mobile",
+    'crispy_forms',
 )
+
+# django-crispy-forms
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 # List of processors used by RequestContext to populate the context.
 # Each one should be a callable that takes the request object as its

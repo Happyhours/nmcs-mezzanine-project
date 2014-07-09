@@ -1,0 +1,38 @@
+{% extends "pages/page.html" %}
+
+{% load mezzanine_tags staticfiles crispy_forms_tags %}
+
+
+{% block main %}
+<!-- BEGIN CONTACT -->
+<section id="contact" class="contact odd">
+    <div class="row">
+        <div class="col-md-12 mg-bt-80">
+            <div class="header-content">
+                <h2>{{ page.contactpage.heading }}</h2>
+                {% if page.contactpage.subheading %}
+                    <h3>{{ page.contactpage.subheading }}</h3>
+                {% endif %}
+            </div>
+        </div>
+
+        {% editable page.contactpage.content %}
+        {{ page.contactpage.content|richtext_filters|safe }}
+        {% endeditable %}
+
+        <div class="col-sm-6 col-md-8">
+            <form action="." method="post">{% csrf_token %}
+            {% crispy form %}
+            </form>
+        </div>
+
+    </div>
+</section>
+<!-- END CONTACT -->
+<!-- BEGIN MAP -->
+{% for data in page.contactpage.contactmap_set.all %}
+<section class="map" id="map" data-lat='{{ data.latitude }}' data-lng='{{ data.longitude }}' data-address="{{ data.address }}" data-color="{{ data.color }}">
+</section>
+{% endfor %}
+<!-- END MAP -->
+{% endblock %}

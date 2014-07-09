@@ -117,3 +117,33 @@ class ServicesItem(models.Model):
         return self.heading
 
 
+class ContactPage(Page, RichText):
+    '''
+    A page representing the format of the contact page
+    '''
+    heading = models.CharField(max_length=200,
+        help_text="Heading for ContactPage")
+    subheading = models.CharField(max_length=200, blank=True,
+        help_text="Optional subheading for ContactPage")
+
+
+    class Meta:
+        verbose_name = _("Contact page")
+        verbose_name_plural = _("Contact pages")
+
+    def __str__(self):
+        return self.heading
+
+
+class ContactMap(Orderable):
+    '''
+    A model representing the map on the contact page
+    '''
+    latitude = models.CharField(max_length=50,
+        help_text="Latitude")
+    longitude = models.CharField(max_length=50,
+        help_text="Longitude")
+    address = models.TextField(help_text="Html text to be show when user clicks on map marker")
+    color = models.CharField(max_length=50,
+        help_text="Color")
+    contactpage = models.ForeignKey(ContactPage)

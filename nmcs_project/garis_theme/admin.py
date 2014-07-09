@@ -8,6 +8,8 @@ from garis_theme.models import (
     ServicesPage,
     Slide,
     ServicesItem,
+    ContactPage,
+    ContactMap,
 )
 
 # class HomePageAdmin(admin.ModelAdmin):
@@ -38,6 +40,7 @@ class EmployeeInline(TabularDynamicInlineAdmin):
         "fields": ["name", "position", "text", "image", "_order"],
     }),
 
+
 class AboutPageAdmin(PageAdmin):
     inlines = [EmployeeInline]
 
@@ -49,12 +52,25 @@ class SlideItemInline(TabularDynamicInlineAdmin):
     model = Slide
     extra = 3
 
+
 class ServicesItemInline(TabularDynamicInlineAdmin):
     model = ServicesItem
     extra = 3
+
 
 class ServicesPageAdmin(PageAdmin):
     inlines = [SlideItemInline, ServicesItemInline]
 
 
 admin.site.register(ServicesPage, ServicesPageAdmin)
+
+
+class ContactMapInline(TabularDynamicInlineAdmin):
+    model = ContactMap
+
+
+class ContactPageAdmin(PageAdmin):
+    inlines = [ContactMapInline]
+
+
+admin.site.register(ContactPage, ContactPageAdmin)
