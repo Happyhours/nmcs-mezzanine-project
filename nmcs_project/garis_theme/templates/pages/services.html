@@ -3,5 +3,60 @@
 {% load mezzanine_tags staticfiles %}
 
 {% block main %}
-hahahaha
+<!-- BEGIN SERVICES -->
+<section id="services" class="services">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="header-content">
+                <h2>{{ page.servicespage.heading }}</h2>
+                {% if page.servicespage.subheading %}
+                    <h3>{{ page.servicespage.subheading }}</h3>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                {% for item in page.servicespage.servicesitem_set.all %}
+                <div class="col-md-4 mg-bt-40">
+                    <div class="row services-item">
+                        <div class="col-xs-12 col-sm-3">
+                            <div class="services-icon">
+                                <i class="fa {{ item.icon }}"></i>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-9">
+                            <div class="services-desc">
+                                <h4>{{ item.heading }}</h4>
+                                <p>{{ item.text }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-8 mg-bt-80">
+            {% editable page.servicespage.content %}
+            {{ page.servicespage.content|richtext_filters|safe }}
+            {% endeditable %}
+        </div>
+
+        <div class="col-md-4 mg-bt-80">
+            <h3>{{ page.servicespage.slider_heading }}</h3>
+            {% if page.servicespage.slider_text %}
+                <p>{{ page.servicespage.slider_text }}</p>
+            {% endif %}
+            <div id="slider-services">
+                {% for item in page.servicespage.slide_set.all %}
+                    <div>
+                        <a href="{{ item.link_to_image }}">
+                            <img src="{{ MEDIA_URL }}{% thumbnail item.image 200 200 %}" alt="image description" />
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END SERVICES -->
 {% endblock %}

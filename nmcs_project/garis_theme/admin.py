@@ -5,6 +5,9 @@ from garis_theme.models import (
     HomePage,
     AboutPage,
     Employee,
+    ServicesPage,
+    Slide,
+    ServicesItem,
 )
 
 # class HomePageAdmin(admin.ModelAdmin):
@@ -28,8 +31,6 @@ class HomePageAdmin(PageAdmin):
 admin.site.register(HomePage, HomePageAdmin)
 
 
-
-
 class EmployeeInline(TabularDynamicInlineAdmin):
     model = Employee
     extra = 1
@@ -42,3 +43,18 @@ class AboutPageAdmin(PageAdmin):
 
 
 admin.site.register(AboutPage, AboutPageAdmin)
+
+
+class SlideItemInline(TabularDynamicInlineAdmin):
+    model = Slide
+    extra = 3
+
+class ServicesItemInline(TabularDynamicInlineAdmin):
+    model = ServicesItem
+    extra = 3
+
+class ServicesPageAdmin(PageAdmin):
+    inlines = [SlideItemInline, ServicesItemInline]
+
+
+admin.site.register(ServicesPage, ServicesPageAdmin)
