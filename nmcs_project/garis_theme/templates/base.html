@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %}>
-{% load pages_tags mezzanine_tags i18n future staticfiles %}
+{% load pages_tags mezzanine_tags i18n future staticfiles garis_theme_extra %}
 
 <head>
     <!-- GARIS THEME -->
@@ -107,30 +107,75 @@
             {% block main %}
             {% endblock %}
 
+
             <!-- BEGIN FOOTER -->
+            {% get_sitewide_content as sitewide %}
+            {% if sitewide %}
             <footer>
               <div class="row">
                 <div class="col-md-12">
                   <div class="row">
                     <div class="col-md-4">
-                      CERTIFIED
+                        {% editable sitewide.box_one_title sitewide.box_one_content %}
+                        <h4>{{ sitewide.box_one_title }}</h4>
+                        {{ sitewide.box_one_content|richtext_filters|safe }}
+                        {% endeditable %}
                     </div>
                     <div class="col-md-4">
-                      CONTACTS
+                        {% editable sitewide.box_two_title sitewide.box_two_content %}
+                        <h4>{{ sitewide.box_two_title }}</h4>
+                        {{ sitewide.box_two_content|richtext_filters|safe }}
+                        {% for data in sitewide.footercontactdata_set.all %}
+                        <address>
+                            <a href="javascript:;">
+                                <i class="fa {{ data.icon }}"></i>
+                            </a>
+                            &nbsp;
+                            <strong>{{ data.title }}</strong>
+                            &nbsp;
+                            {{ data.text }}
+                        </address>
+                        {% endfor %}
+                        {% endeditable %}
                     </div>
                     <div class="col-md-4">
-                      OPENTIMES
+                        {% editable sitewide.box_three_title sitewide.box_three_content %}
+                        <h4>{{ sitewide.box_three_title }}</h4>
+                        <table class="table borderless">
+                            <tbody>
+                                {% for data in sitewide.opentimedata_set.all %}
+                                <tr>
+                                    <td class="col-xs-6"> {{ data.text }} </td>
+                                    <td class="col-xs-6"> {{ data.time }} </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {{ sitewide.box_three_content|richtext_filters|safe }}
+                        {% for data in sitewide.opentimealert_set.all %}
+                        <div class="alert alert-danger alert-dismissable">
+                            {{ data.text|richtext_filters|safe }}
+                        </div>
+                        {% endfor %}
+                        {% endeditable %}
                     </div>
                   </div>
                 </div>
                 <div class="col-md-12">
-                  PARTNERS
+                    <ul class="client-slider">
+                        {% for partner_image in sitewide.partnerimage_set.all %}
+                        <li>
+                            <img src="{{ MEDIA_URL }}{% thumbnail partner_image.image 100 100 %}" href="{{ partner_image.link }}" alt="{{ partner_image.link }}">
+                        </li>
+                        {% endfor %}
+                    </ul>
                 </div>
                 <div class="col-md-12">
                   {% page_menu "pages/menus/footer.html" %}
                 </div>
               </div>
             </footer>
+            {% endif %}
             <!-- END FOOTER -->
 
         </div><!-- END CONTAINER -->

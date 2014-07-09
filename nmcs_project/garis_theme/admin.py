@@ -1,5 +1,7 @@
 from django.contrib import admin
 
+from mezzanine.core.admin import SingletonAdmin
+
 # Register your models here.
 from garis_theme.models import (
     HomePage,
@@ -10,7 +12,13 @@ from garis_theme.models import (
     ServicesItem,
     ContactPage,
     ContactMap,
+    SitewideContent,
+    PartnerImage,
+    OpenTimeData,
+    OpenTimeAlert,
+    FooterContactData
 )
+
 
 # class HomePageAdmin(admin.ModelAdmin):
 #     fieldsets = [
@@ -74,3 +82,26 @@ class ContactPageAdmin(PageAdmin):
 
 
 admin.site.register(ContactPage, ContactPageAdmin)
+
+
+class PartnerImageInline(TabularDynamicInlineAdmin):
+    model = PartnerImage
+
+
+class OpenTimeDataInline(TabularDynamicInlineAdmin):
+    model = OpenTimeData
+
+
+class OpenTimeAlertInline(TabularDynamicInlineAdmin):
+    model = OpenTimeAlert
+
+
+class FooterContactDataInline(TabularDynamicInlineAdmin):
+    model = FooterContactData
+
+
+class SitewideContentAdmin(SingletonAdmin):
+    inlines = [PartnerImageInline, OpenTimeDataInline, OpenTimeAlertInline, FooterContactDataInline]
+
+
+admin.site.register(SitewideContent, SitewideContentAdmin)

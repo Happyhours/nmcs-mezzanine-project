@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from mezzanine.core.fields import FileField, RichTextField
-from mezzanine.core.models import RichText, Orderable, Slugged
+from mezzanine.core.models import RichText, Orderable, Slugged, SiteRelated
 from mezzanine.pages.models import Page
 from mezzanine.utils.models import upload_to
 
@@ -147,3 +147,66 @@ class ContactMap(Orderable):
     color = models.CharField(max_length=50,
         help_text="Color")
     contactpage = models.ForeignKey(ContactPage)
+
+
+class SitewideContent(SiteRelated):
+    '''
+    Represents the footer content
+    '''
+    box_one_title = models.CharField(max_length=200, default="Contact us")
+    box_one_content = RichTextField()
+    box_two_title = models.CharField(max_length=200, default="Sites we like")
+    box_two_content = RichTextField()
+    box_three_title = models.CharField(max_length=200, default="Highlighted pages")
+    box_three_content = RichTextField()
+
+    #box_four_title = models.CharField(max_length=200, default="Partners")
+
+    class Meta:
+        verbose_name = _('Sitewide Content')
+        verbose_name_plural = _('Sitewide Content')
+
+
+class PartnerImage(Orderable):
+    '''
+    A partner image in a slider connected to a SitewideContent
+    '''
+    image = FileField(verbose_name=_("Image"),
+        upload_to=upload_to("garis_theme.PartnerImage.image", "partner_image"),
+        format="Image", max_length=255, null=True, blank=True)
+    link_to_image = models.CharField(max_length=2000, blank=True, default="#",
+        help_text="Optional, if provided clicking the image will go here.")
+    sitewidecontent = models.ForeignKey(SitewideContent)
+
+
+class OpenTimeData(Orderable):
+    '''
+    Data for table in SiteWideContent
+    '''
+    text = models.CharField(max_length=50)
+    time = models.CharField(max_length=50)
+    sitewidecontent = models.ForeignKey(SitewideContent)  
+
+    def __str__(self):
+        return self.text + " " + self.time
+
+
+class OpenTimeAlert(Orderable):
+    '''
+    An alert that represents important text "Closed 28 juli" connected to a SitewideContent
+    '''
+    text = RichTextField()
+    sitewidecontent = models.ForeignKey(SitewideContent) 
+
+    def __str__(self):
+        return self.text
+
+
+class FooterContactData(Orderable):
+    title = models.CharField(max_length=50)
+    text = models.CharField(max_length=50)
+    icon = models.CharField(max_length=20)
+    sitewidecontent = models.ForeignKey(SitewideContent) 
+
+    def __str__(self):
+        return self.title
