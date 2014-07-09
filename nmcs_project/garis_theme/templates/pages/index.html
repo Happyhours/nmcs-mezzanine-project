@@ -2,7 +2,6 @@
 
 {% load mezzanine_tags staticfiles %}
 
-
 {% block main %}
 <!-- BEGIN HOME -->
 <section class="call-ta">
@@ -14,13 +13,20 @@
                     <span>
                         {{ page.homepage.subheading }}
                     </span>
-                </h2>               
+                </h2>
+
+                {% editable page.homepage.content %}
+                {{ page.homepage.content|richtext_filters|safe }}
+                {% endeditable %}
+             
             </div>            
         </div>
         <div class="col-sm-8">
-            <a href="{{ home.first.link }}">
-                <img class="img-responsive img-thumbnail" src="{{ home.first.image.url }}" alt="action-image">
-            </a>
+            <div class="feature-image-wrapper">
+                <a href="{{ home.first.link }}">
+                    <img class="img-responsive img-thumbnail" src="{{ MEDIA_URL }}{% thumbnail page.homepage.image 500 500 %}" alt="action-image">
+                </a>
+            </div>
         </div>
     </div>
 </section>

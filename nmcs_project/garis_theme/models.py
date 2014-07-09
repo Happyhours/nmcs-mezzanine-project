@@ -17,6 +17,12 @@ class HomePage(Page, RichText):
         help_text="Heading for HomePage")
     subheading = models.CharField(max_length=200, blank=True,
         help_text="Optional subheading for HomePage")
+    image = FileField(verbose_name=_("Image"),
+        upload_to=upload_to("garis_theme.HomePage.image", "feature_image"),
+        format="Image", max_length=255, null=True, blank=True)
+    link_to_image = models.CharField(max_length=2000, blank=True, default="#",
+        help_text="Optional, if provided clicking the image will go here.")
+
 
     class Meta:
         verbose_name = _("Home page")
@@ -25,9 +31,35 @@ class HomePage(Page, RichText):
     def __str__(self):
         return self.heading
 
-# class Paragraph(Orderable):
-#     '''
-#     A paragraph for paragraphs in HomePage
-#     '''
-#     homepage = models.ForeignKey(HomePage, related_name="slides")
-#     text = models.TextField()
+
+class AboutPage(Page, RichText):
+    '''
+    A page representing the format of the about page
+    '''
+    heading = models.CharField(max_length=200,
+        help_text="Heading for AboutPage")
+    subheading = models.CharField(max_length=200, blank=True,
+        help_text="Optional subheading for AboutPage")
+
+
+    class Meta:
+        verbose_name = _("About page")
+        verbose_name_plural = _("About pages")
+
+    def __str__(self):
+        return self.heading
+
+
+class Employee(Orderable):
+    name = models.CharField(max_length=50,
+        help_text="Employee name")
+    position = models.CharField(max_length=100, blank=True,
+        help_text="Employee position")
+    text = models.TextField(help_text="Information about employee")
+    image = FileField(verbose_name=_("Image"),
+        upload_to=upload_to("garis_theme.AboutPage.image", "employee_image"),
+        format="Image", max_length=255)
+    aboutpage = models.ForeignKey(AboutPage)
+
+    def __str__(self):
+        return self.name

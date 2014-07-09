@@ -12,6 +12,13 @@
     height: 110px;
 }
 
+/* HOMEPAGE CSS */
+
+.feature-image-wrapper {
+    max-height: 500px;
+    max-width: 500px;
+}
+
 /* FOOTER CSS */
 
 .certified-image-wrapper {
