@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.conf.urls import patterns, include, url
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
+from django.views.defaults import page_not_found
 
 from mezzanine.core.views import direct_to_template
 
@@ -86,6 +87,10 @@ urlpatterns += patterns('',
     # need to use the ``SITE_PREFIX`` setting as well.
 
     # ("^%s/" % settings.SITE_PREFIX, include("mezzanine.urls"))
+
+    # Added this beacuse i turned off comments and somebody clever can post comments by using the url otherwise
+    # Also added from django.views.defaults import page_not_found in top
+    ("comment/", page_not_found),
 
 )
 
