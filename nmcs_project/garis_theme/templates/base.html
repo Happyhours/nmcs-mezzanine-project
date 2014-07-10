@@ -116,10 +116,37 @@
                 <div class="col-md-12">
                   <div class="row">
                     <div class="col-md-4">
-                        {% editable sitewide.box_one_title sitewide.box_one_content %}
-                        <h4>{{ sitewide.box_one_title }}</h4>
-                        {{ sitewide.box_one_content|richtext_filters|safe }}
-                        {% endeditable %}
+                        {% load blog_tags %}
+
+                        {% block blog_recent_posts %}
+                        {% blog_recent_posts 5 as recent_posts %}
+                        {% if recent_posts %}
+                        <h4 class="widget-title">
+                            {% trans "Recent Posts" %}
+                        </h4>
+                        <div class="row widget">
+                            <div class="col-md-12">
+                                <div class="popular-post-widget">
+
+                                    <ul class="list-unstyled recent-posts">
+                                    {% for recent_post in recent_posts %}
+                                    <li>
+                                        {% spaceless %}
+                                        <a href="{{ recent_post.get_absolute_url }}">
+                                        {{ recent_post.title }}
+                                        </a>
+                                        {% endspaceless %}
+                                    </li>
+                                    {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /widget -->
+                        {% endif %}
+                        {% endblock %}
+
+
                     </div>
                     <div class="col-md-4">
                         {% editable sitewide.box_two_title sitewide.box_two_content %}
