@@ -21,50 +21,84 @@
 <li class="active">{{ blog_post.title }}</li>
 {% endblock %}
 
+
 {% block main %}
 
-{% block blog_post_detail_postedby %}
-{% editable blog_post.publish_date %}
-<h6 class="post-meta">
-    {% trans "Posted by" %}:
-    {% with blog_post.user as author %}
-    <a href="{% url "blog_post_list_author" author %}">{{ author.get_full_name|default:author.username }}</a>
-    {% endwith %}
-    {% blocktrans with sometime=blog_post.publish_date|timesince %}{{ sometime }} ago{% endblocktrans %}
-</h6>
-{% endeditable %}
-{% endblock %}
-{% block blog_post_detail_commentlink %}
-<p>
-    {% if blog_post.allow_comments %}
-        {% if settings.COMMENTS_DISQUS_SHORTNAME %}
-            (<a href="{{ blog_post.get_absolute_url }}#disqus_thread"
-                data-disqus-identifier="{% disqus_id_for blog_post %}">{% spaceless %}
-                {% trans "Comments" %}
-            {% endspaceless %}</a>)
-        {% else %}(<a href="#comments">{% spaceless %}
-            {% blocktrans count comments_count=blog_post.comments_count %}{{ comments_count }} comment{% plural %}{{ comments_count }} comments{% endblocktrans %}
-            {% endspaceless %}</a>)
-        {% endif %}
-    {% endif %}
-</p>
-{% endblock %}
+<!-- BEGIN BLOG -->
+<section id="blog" class="blog">
+    <div class="row">
+        <div class="col-md-9">
+            <div id="primary" class="row">
 
-{% block blog_post_detail_featured_image %}
-{% if settings.BLOG_USE_FEATURED_IMAGE and blog_post.featured_image %}
-<p><img class="img-responsive" src="{{ MEDIA_URL }}{% thumbnail blog_post.featured_image 600 0 %}"></p>
-{% endif %}
-{% endblock %}
+                <div class="col-md-12">
 
-{% if settings.COMMENTS_DISQUS_SHORTNAME %}
-{% include "generic/includes/disqus_counts.html" %}
-{% endif %}
+                    <!-- BEGIN ARTICLE -->
+                    <article class="post">
+                        <div class="post-thumb">
+                            {% block blog_post_detail_featured_image %}
+                            {% if settings.BLOG_USE_FEATURED_IMAGE and blog_post.featured_image %}
+                            <a href="{{ blog_post.get_absolute_url }}">
+                                <img class="img-responsive" src="{{ MEDIA_URL }}{% thumbnail blog_post.featured_image 600 0 %}">
+                            </a>
+                            {% endif %}
+                            {% endblock %}
+                        </div>
 
-{% block blog_post_detail_content %}
-{% editable blog_post.content %}
-{{ blog_post.content|richtext_filters|safe }}
-{% endeditable %}
-{% endblock %}
+                        <div class="post-title">
+                            <h1>
+                                <a href="{{ blog_post.get_absolute_url }}">{{ blog_post.title }}</a>
+                            </h1>
+                        </div>
+
+                        <div class="post-meta">
+                            {% block blog_post_detail_postedby %}
+                            {% editable blog_post.publish_date %}
+
+                                {% trans "Posted by" %}:
+                                {% with blog_post.user as author %}
+                                <a href="{% url 'blog_post_list_author' author %}">
+                                    <span class="author">
+                                        {{ author.get_full_name|default:author.username }}
+                                    </span>
+                                </a>
+                                {% endwith %}
+                                {% blocktrans with sometime=blog_post.publish_date|timesince %}
+                                    <span class="dates">{{ sometime }} ago </span>
+                                {% endblocktrans %}
+
+                            {% endeditable %}
+                            {% endblock %}
+                        </div>          
+
+                        {% block blog_post_detail_commentlink %}
+                        <p>
+                            {% if blog_post.allow_comments %}
+                                {% if settings.COMMENTS_DISQUS_SHORTNAME %}
+                                    (<a href="{{ blog_post.get_absolute_url }}#disqus_thread"
+                                        data-disqus-identifier="{% disqus_id_for blog_post %}">{% spaceless %}
+                                        {% trans "Comments" %}
+                                    {% endspaceless %}</a>)
+                                {% else %}(<a href="#comments">{% spaceless %}
+                                    {% blocktrans count comments_count=blog_post.comments_count %}{{ comments_count }} comment{% plural %}{{ comments_count }} comments{% endblocktrans %}
+                                    {% endspaceless %}</a>)
+                                {% endif %}
+                            {% endif %}
+                        </p>
+                        {% endblock %}
+
+
+
+                        {% if settings.COMMENTS_DISQUS_SHORTNAME %}
+                        {% include "generic/includes/disqus_counts.html" %}
+                        {% endif %}
+
+                        <div class="post-content">
+                            {% block blog_post_detail_content %}
+                            {% editable blog_post.content %}
+                            {{ blog_post.content|richtext_filters|safe }}
+                            {% endeditable %}
+                            {% endblock %}
+                        </div>
 
 {% block blog_post_detail_keywords %}
 {% keywords_for blog_post as tags %}
@@ -80,19 +114,6 @@
 {% endif %}
 {% endblock %}
 
-{% block blog_post_detail_rating %}
-<div class="panel panel-default rating">
-    <div class="panel-body">
-    {% rating_for blog_post %}
-    </div>
-</div>
-{% endblock %}
-
-{% block blog_post_detail_sharebuttons %}
-{% set_short_url_for blog_post %}
-<a class="btn btn-sm share-twitter" target="_blank" href="http://twitter.com/home?status={{ blog_post.short_url|urlencode }}%20{{ blog_post.title|urlencode }}">{% trans "Share on Twitter" %}</a>
-<a class="btn btn-sm share-facebook" target="_blank" href="http://facebook.com/sharer.php?u={{ request.build_absolute_uri }}&amp;t={{ blog_post.title|urlencode }}">{% trans "Share on Facebook" %}</a>
-{% endblock %}
 
 {% block blog_post_previous_next %}
 <ul class="pager">
@@ -129,5 +150,24 @@
 {% block blog_post_detail_comments %}
 {% if blog_post.allow_comments %}{% comments_for blog_post %}{% endif %}
 {% endblock %}
+
+
+                    </article>
+                    <!-- END ARTICLE -->
+                </div>
+            </div>
+        </div> <!-- END COL-MD-9 -->
+
+        <div class="col-md-3 widgetbar">
+
+            {% block right_panel %}
+            {% include "blog/includes/filter_panel.html" %}
+            {% endblock %}
+
+        </div>
+
+    </div>
+</section>
+
 
 {% endblock %}
