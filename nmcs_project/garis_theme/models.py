@@ -210,3 +210,12 @@ class FooterContactData(Orderable):
 
     def __str__(self):
         return self.title
+
+
+# class PortfolioPage(Page):
+#     '''
+#     A collection of individual portfolio items
+#     '''
+#     class Meta:
+#         verbose_name = _("Portfolio")
+#         verbose_name_plural = _("Portfolios")

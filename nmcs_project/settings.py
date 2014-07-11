@@ -50,18 +50,20 @@ from __future__ import absolute_import, unicode_literals
 # args and a dictionary of keyword args, to use when creating the
 # field instance. When specifying the field class, the path
 # ``django.models.db.`` can be omitted for regular Django model fields.
-#
+
+
 # EXTRA_MODEL_FIELDS = (
 #     (
 #         # Dotted path to field.
-#         "mezzanine.blog.models.BlogPost.image",
+#         "mezzanine.galleries.models.GalleryImage.category",
 #         # Dotted path to field class.
-#         "somelib.fields.ImageField",
+#         "CharField",
 #         # Positional args for field class.
-#         ("Image",),
+#         ("category",),
 #         # Keyword args for field class.
-#         {"blank": True, "upload_to": "blog"},
+#         {"max_length":50},
 #     ),
+# )
 #     # Example of adding a field to *all* of Mezzanine's content types:
 #     (
 #         "mezzanine.pages.models.Page.another_field",
@@ -70,6 +72,18 @@ from __future__ import absolute_import, unicode_literals
 #         {"blank": True, "default": 1},
 #     ),
 # )
+
+
+EXTRA_MODEL_FIELDS = (
+    (
+        "mezzanine.galleries.models.GalleryImage.category",
+        "CharField",
+        ("Category",),
+        {"max_length": 255},
+    ),
+)
+
+
 
 # Setting to turn on featured images for blog posts. Defaults to False.
 #
