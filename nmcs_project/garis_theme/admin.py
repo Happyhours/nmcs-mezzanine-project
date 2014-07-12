@@ -16,7 +16,9 @@ from garis_theme.models import (
     PartnerImage,
     OpenTimeData,
     OpenTimeAlert,
-    FooterContactData
+    FooterContactData,
+    PortfolioPage,
+    PortfolioItem,
 )
 
 
@@ -104,6 +106,18 @@ class SitewideContentAdmin(SingletonAdmin):
     inlines = [PartnerImageInline, OpenTimeDataInline, OpenTimeAlertInline, FooterContactDataInline]
 
 
+admin.site.register(SitewideContent, SitewideContentAdmin)
+
+
+class PortfolioItemInline(TabularDynamicInlineAdmin):
+    model = PortfolioItem
+
+
+class PortfolioPageAdmin(PageAdmin):
+    inlines = [PortfolioItemInline]
+
+
+admin.site.register(PortfolioPage, PortfolioPageAdmin)
 
 # from copy import deepcopy
 # from mezzanine.galleries.admin import GalleryAdmin

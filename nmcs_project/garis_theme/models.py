@@ -102,7 +102,7 @@ class Slide(Orderable):
         help_text="Optional, if provided clicking the image will go here.")
 
 
-class ServicesItem(models.Model):
+class ServicesItem(Orderable):
     '''
     A col-md-4 mg-bt-40 services item box
     '''
@@ -212,10 +212,31 @@ class FooterContactData(Orderable):
         return self.title
 
 
-# class PortfolioPage(Page):
-#     '''
-#     A collection of individual portfolio items
-#     '''
-#     class Meta:
-#         verbose_name = _("Portfolio")
-#         verbose_name_plural = _("Portfolios")
+class PortfolioPage(Page, RichText):
+    '''
+    A collection of individual portfolio items
+    '''
+    heading = models.CharField(max_length=200,
+        help_text="Heading for HomePage")
+    subheading = models.CharField(max_length=200, blank=True,
+        help_text="Optional subheading for HomePage")
+
+    class Meta:
+        verbose_name = _("Portfolio page")
+        verbose_name_plural = _("Portfolios pages")
+
+
+class PortfolioItem(Orderable):
+    '''
+    A portfolio item
+    '''
+    job = models.TextField(help_text="Information about job")
+    image = FileField(verbose_name=_("Image"),
+        upload_to=upload_to("garis_theme.PortfolioItem.image", "portfolio_item"),
+        format="Image", max_length=255, null=True, blank=True)
+    before_power = models.CharField(max_length=50)
+    after_power = models.CharField(max_length=50)
+    portfoliopage = models.ForeignKey(PortfolioPage)
+
+
+

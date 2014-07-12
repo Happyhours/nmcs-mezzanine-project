@@ -73,15 +73,15 @@ from __future__ import absolute_import, unicode_literals
 #     ),
 # )
 
-
-EXTRA_MODEL_FIELDS = (
-    (
-        "mezzanine.galleries.models.GalleryImage.category",
-        "CharField",
-        ("Category",),
-        {"max_length": 255},
-    ),
-)
+# Field injection for GalleryImage category
+# EXTRA_MODEL_FIELDS = (
+#     (
+#         "mezzanine.galleries.models.GalleryImage.category",
+#         "CharField",
+#         ("Category",),
+#         {"max_length": 255},
+#     ),
+# )
 
 
 

@@ -1,0 +1,70 @@
+{% extends "pages/page.html" %}
+
+{% load mezzanine_tags staticfiles %}
+
+{% block main %}
+{{ block.super }}
+
+<!-- BEGIN PORTFOLIO -->
+<section id="about" class="about odd">
+    <div class="row">
+        <div class="col-md-12">
+            {% editable page.portfoliopage.content %}
+            {{ page.portfoliopage.content|richtext_filters|safe }}
+            {% endeditable %}
+        </div>
+
+        <div class="col-md-12 mg-bt-80">
+            <div class="row portfolioContainer  text-center">
+
+            {% for item in page.portfoliopage.portfolioitem_set.all %}
+                <div class="col-md-4">
+                    <div class="teams">
+                        <!--
+                        <div class="pict">
+                            <img src="{{ MEDIA_URL }}{% thumbnail item.image 200 200 %}" alt="Team 1">
+                        </div>
+                        -->
+                        <div class="desc">
+                            <h3>Märke</h3>
+                            <span>Motor</span>
+                            <p>{{ item.job }}</p>
+
+                            <!--
+                            <div class="skill-bar">
+                                <ul>
+                                    <li>
+                                        <div class="bar" style="width:100%;">
+                                            <h4>Power</h4>
+                                        </div>
+                                        <span>10 / 10</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            -->
+
+
+                            <div class="progress">
+                              <div class="progress-bar progress-bar-success" style="width: {{ item.before_power }}%">
+                                <!--<span>{{ item.before_power }}% Before (success)</span>-->
+                                <span class="sr-only">{{ item.before_power }}% Before (success)</span>
+                              </div>
+                              <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: {{ item.after_power }}%">
+                                <!--<span>{{ item.after_power }}% After (warning)</span>-->
+                                <span class="sr-only">{{ item.after_power }}% After (warning)</span>
+                              </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END PORTFOLIO -->
+
+{% endblock %}
+
