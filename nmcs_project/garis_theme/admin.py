@@ -105,18 +105,18 @@ class SitewideContentAdmin(SingletonAdmin):
 
 
 
-from copy import deepcopy
-from mezzanine.galleries.admin import GalleryAdmin
-from mezzanine.galleries.models import Gallery, GalleryImage
+# from copy import deepcopy
+# from mezzanine.galleries.admin import GalleryAdmin
+# from mezzanine.galleries.models import Gallery, GalleryImage
 
 
-m_fieldsets = deepcopy(GalleryAdmin.fieldsets)
+# m_fieldsets = deepcopy(GalleryAdmin.fieldsets)
 
-#m_fieldsets[0][1]["fields"].insert(-1, "sold") // THIS LINE CAUSE ERROR
+# #m_fieldsets[0][1]["fields"].insert(-1, "sold") // THIS LINE CAUSE ERROR
 
-class MyGalleryAdmin(GalleryAdmin):
-    fieldsets = m_fieldsets
+# class MyGalleryAdmin(GalleryAdmin):
+#     fieldsets = m_fieldsets
 
-admin.site.unregister(Gallery)
-admin.site.register(Gallery, MyGalleryAdmin)
+# admin.site.unregister(Gallery)
+# admin.site.register(Gallery, MyGalleryAdmin)
 
