@@ -87,6 +87,117 @@ footer p {
     border-radius: 0px;
 }
 
+ /* CUSTOM PORTFOLIO CSS */
+
+.progress {
+    height: 100%;
+    border-radius: 0;
+    /*background: rgba(0, 0, 0, 0.2);*/
+    background: #fff;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.progress-bar {
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.progress-bar-span {
+
+}
+
+.about .teams span {
+    padding-bottom: 0px;
+}
+
+.progress-bar-warning {
+    /*background-color: rgba(0, 0, 0, 0.2);*/
+    background-color: #1A1E22;
+    background-color: #5cb85c;
+
+    background-color: rgba(0, 0, 0, 0.4);
+    /*
+    background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+    background-image:         linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+    */
+}
+
+.progress-bar-success {
+}
+
+.skills-legend {
+    margin-top: 20px;
+    opacity: 0.8;
+}
+
+.skills-legend:before {
+    width: 100%;
+    height: 3px;
+    position: relative;
+    content: ' ';
+    display: block;
+    margin-bottom: -13px;
+    background: #c6c6c6;
+}
+
+.skills-legend div {
+    width: 25%;
+    display: inline-block;
+    font-size: 1.2em;
+    color: #a9a9a9;
+    float: left;
+}
+
+.legend-left.legend:before {
+    margin-left: 0;
+}
+.legend:before {
+    width: 8px;
+    height: 10px;
+    position: relative;
+    content: ' ';
+    display: block;
+    margin-top: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+    margin-left: auto;
+    margin-bottom: 15px;
+    background: #c6c6c6;
+}
+
+.legend-right {
+    text-align: right;
+}
+
+.legend-right.legend:before {
+    margin-right: 0px;
+}
+
+.skills-legend-text div {
+    width: 25%;
+    display: inline-block;
+    font-size: 1.2em;
+    color: #a9a9a9;
+    float: left;
+}
+
+.about .teams .skills-legend-text h3 {
+    margin-bottom: 0px;
+    color: #202020;
+    font-weight: 400;
+}
+
+
+
+/*
+vanlig hd 48-72 hästkrafter standard
+
+efter trimming 150 hästkrafer
+*/
+
 
 
 

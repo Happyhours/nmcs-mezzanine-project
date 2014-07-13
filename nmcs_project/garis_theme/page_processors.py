@@ -3,7 +3,9 @@ from django.http import HttpResponseRedirect
 from mezzanine.pages.page_processors import processor_for
 
 from django.core.mail import send_mail
-from garis_theme.models import ContactPage
+from garis_theme.models import (
+    ContactPage,
+)
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import (
@@ -80,3 +82,4 @@ def author_form(request, page):
             redirect = request.path + "?submitted=true"
             return HttpResponseRedirect(redirect)
     return {"form": form}
+
