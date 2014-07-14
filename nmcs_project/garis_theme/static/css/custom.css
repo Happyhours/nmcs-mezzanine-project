@@ -96,13 +96,15 @@ footer p {
     background: #fff;
     -webkit-box-shadow: none;
     box-shadow: none;
+    margin-bottom: 0px;
+    margin-top: 20px;
 }
 
 .progress-bar {
     padding-left: 4px;
     padding-right: 4px;
-    padding-top: 4px;
-    padding-bottom: 4px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .progress-bar-span {
@@ -184,11 +186,31 @@ footer p {
     float: left;
 }
 
-.about .teams .skills-legend-text h3 {
+.about .teams h4 {
+    margin-top: 30px;
     margin-bottom: 0px;
     color: #202020;
     font-weight: 400;
 }
+
+.about .teams h3 {
+    margin-bottom: 0px;
+    color: #202020;
+    font-weight: 400;
+}
+
+.about .teams h2 {
+    margin-bottom: 20px;
+    color: #202020;
+    font-weight: 400;
+}
+
+.hr {
+    border-top: 2px solid rgba(0, 0, 0, 1.5);
+    margin-top: 25px;
+    margin-bottom: 30px;
+}
+
 
 
 

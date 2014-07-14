@@ -1,6 +1,7 @@
 {% extends "pages/page.html" %}
 
-{% load mezzanine_tags staticfiles %}
+{% load mezzanine_tags staticfiles garis_theme_extra%}
+
 
 {% block main %}
 {{ block.super }}
@@ -19,6 +20,9 @@
 
             {% for item in page.portfoliopage.portfolioitem_set.all %}
 
+
+                
+
         
                 <div class="col-md-4">
                     <div class="teams">
@@ -28,49 +32,30 @@
                         </div>
                         -->
                         <div class="desc">
-                            <h3>Märke</h3>
-                            <span>Motor</span>
+                            <h2>Märke</h2>
+                            
                             <p>{{ item.job }}</p>
 
-                            
-                            <!--
-                            <div class="skill-bar">
-                                <ul>
-                                    <li>
-                                        <div class="bar" style="width:100%;">
-                                            <h4>Power</h4>
-                                        </div>
-                                        <span>10 / 10</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            -->
-                            
-                            <span>Hästkrafter</span>
-                            <div class="progress">
 
-                              <div class="progress-bar progress-bar-success" style="width: {% widthratio item.before_power 250 100 %}%">
+                            <h4><b>Hästkrafter</b></h4>
+                            <div class="progress">
+                              <div class="progress-bar progress-bar-warning" style="width: {% widthratio item.before_power 250 100 %}%">
                                 <span class="progress-bar-span"> {% widthratio item.before_power 100 100 %}</span>
                                 <!--<span class="sr-only">{{ item.after_power }}% After (warning)</span>-->
                               </div>
 
-                                <div class="progress-bar progress-bar-warning" style="width: {% widthratio item.after_power 250 100 %}%">
+                                <div class="progress-bar progress-bar-success" style="width: {% widthratio item.after_power 250 100 %}%">
                                 <span class="progress-bar-span">+ {% widthratio item.after_power 100 100 %}</span>
                                 <!--<span class="sr-only">{{ item.after_power }}% After (warning)</span>-->
                               </div>
-
                             </div>
-
-                            <div>
-                                
-                            </div>
-                            
 
                             <div class="skills-legend-text clearfix">
                                 <div><span><h3>{{ item.before_power }}</h3></span></div>
                                 <div><span><h3>{{ item.after_power }}</h3></span></div>
-                                <div><span><h3>???</h3></span></div>
-                                <div><span><h3>18%</h3></span></div>
+                                <div><span><h3>{{ item.before_power|add:item.after_power }}</h3></span></div>
+                                <div><span><h3>{{ item.before_power|percentage_increase:item.after_power }}%</h3></span>
+                                </div>
                             </div>
 
                             <div class="skills-legend clearfix">
@@ -80,14 +65,39 @@
                                 <div class="legend-left legend"><span>Ökning</span></div>
                             </div>
 
+                            <hr class="hr">
 
+                            <h4><b>Vridmoment</b></h4>
+                            <div class="progress">
+                              <div class="progress-bar progress-bar-warning" style="width: {% widthratio item.before_power 250 100 %}%">
+                                <span class="progress-bar-span"> {% widthratio item.before_power 100 100 %}</span>
+                                <!--<span class="sr-only">{{ item.after_power }}% After (warning)</span>-->
+                              </div>
 
+                                <div class="progress-bar progress-bar-success" style="width: {% widthratio item.after_power 250 100 %}%">
+                                <span class="progress-bar-span">+ {% widthratio item.after_power 100 100 %}</span>
+                                <!--<span class="sr-only">{{ item.after_power }}% After (warning)</span>-->
+                              </div>
+                            </div>
 
+                            <div class="skills-legend-text clearfix">
+                                <div><span><h3>{{ item.before_power }}</h3></span></div>
+                                <div><span><h3>{{ item.after_power }}</h3></span></div>
+                                <div><span><h3>{{ item.before_power|add:item.after_power }}</h3></span></div>
+                                <div><span><h3>{{ item.before_power|percentage_increase:item.after_power }}%</h3></span></div>
+                            </div>
 
-
-
+                            <div class="skills-legend clearfix">
+                                <div class="legend-left legend"><span>Före</span></div>
+                                <div class="legend-left legend"><span>Efter</span></div>
+                                <div class="legend-left legend"><span>Totalt</span></div>
+                                <div class="legend-left legend"><span>Ökning</span></div>
+                            </div>
 
                         </div>
+
+
+                
                     </div>
                 </div>
             {% endfor %}
