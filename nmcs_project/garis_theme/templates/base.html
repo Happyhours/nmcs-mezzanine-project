@@ -122,7 +122,7 @@
                         {% blog_recent_posts 5 as recent_posts %}
                         {% if recent_posts %}
                         <h4 class="widget-title">
-                            {% trans "Recent Posts" %}
+                            {% trans "NYHETER" %}
                         </h4>
                         <div class="row widget">
                             <div class="col-md-12">
@@ -192,7 +192,7 @@
                     <ul class="client-slider">
                         {% for partner_image in sitewide.partnerimage_set.all %}
                         <li>
-                            <img src="{{ MEDIA_URL }}{% thumbnail partner_image.image 100 100 %}" href="{{ partner_image.link }}" alt="{{ partner_image.link }}">
+                            <img class="img-thumbnail" src="{{ MEDIA_URL }}{% thumbnail partner_image.image 100 100 %}" href="{{ partner_image.link }}" alt="{{ partner_image.link }}">
                         </li>
                         {% endfor %}
                     </ul>

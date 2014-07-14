@@ -16,9 +16,12 @@
             </div>
         </div>
 
-        {% editable page.contactpage.content %}
-        {{ page.contactpage.content|richtext_filters|safe }}
-        {% endeditable %}
+
+        <div class="col-sm-2 col-md-4 pull-right">
+            {% editable page.contactpage.content %}
+            {{ page.contactpage.content|richtext_filters|safe }}
+            {% endeditable %}
+        </div>
 
         <div class="col-sm-6 col-md-8">
             <form action="." method="post">{% csrf_token %}

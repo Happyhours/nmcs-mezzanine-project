@@ -8,11 +8,6 @@
 <!-- BEGIN PORTFOLIO -->
 <section id="portfolio" class="portfolio odd">
     <div class="row">
-        <div class="col-md-12">
-            {% editable page.gallery.content %}
-            {{ page.gallery.content|richtext_filters|safe }}
-            {% endeditable %}
-        </div>
         <div class="col-md-12 mg-bt-80">
             <div class="row portfolioContainer  text-center">
             {% with page.gallery.images.all as images %}

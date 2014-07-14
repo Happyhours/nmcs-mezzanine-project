@@ -9,21 +9,12 @@
 <!-- BEGIN PORTFOLIO -->
 <section id="about" class="about odd">
     <div class="row">
-        <div class="col-md-12">
-            {% editable page.portfoliopage.content %}
-            {{ page.portfoliopage.content|richtext_filters|safe }}
-            {% endeditable %}
-        </div>
 
         <div class="col-md-12 mg-bt-80">
             <div class="row portfolioContainer">
 
             {% for item in page.portfoliopage.portfolioitem_set.all %}
 
-
-                
-
-        
                 <div class="col-md-4">
                     <div class="teams">
                         <!--
