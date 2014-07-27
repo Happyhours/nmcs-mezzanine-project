@@ -271,6 +271,8 @@ INSTALLED_APPS = (
     #"mezzanine.accounts",
     #"mezzanine.mobile",
     'crispy_forms',
+    'storages',
+    'gunicorn',
 )
 
 # django-crispy-forms
@@ -355,6 +357,103 @@ OPTIONAL_APPS = (
 #     "SECRET_KEY": SECRET_KEY,
 #     "NEVERCACHE_KEY": NEVERCACHE_KEY,
 # }
+
+
+###################
+# HEROKU SETTINGS #
+###################
+
+# Parse database configuration from $DATABASE_URL
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Allow all host headers
+ALLOWED_HOSTS = ['*']
+
+##################
+# DJANGO         #
+##################
+SECRET_KEY = "@51jc&g_-p7r*qkl39)m(-yg(kgqlrw9&xc(3b_!@5ly$#)wq1"
+NEVERCACHE_KEY = "l3g-vb(ay9y_90xvacv2%ua2&lgrutrdkcrjc*i&6-r5-@bv7x"
+
+###################
+# S3 STATIC FILES #
+###################
+
+#AWS_QUERYSTRING_AUTH = False
+#AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+#AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+#AWS_STORAGE_BUCKET_NAME = 'bucketname'
+#AWS_PRELOAD_METADATA = True #helps collectstatic do updates
+
+#STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+#DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
+#STATIC_URL = 'https://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
+#ADMIN_MEDIA_PREFIX = STATIC_URL + 'grappelli/'
+
+#MEDIA_URL = 'https://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
+
+
+
+# Use Amazon S3 for storage for uploaded media files.
+DEFAULT_FILE_STORAGE = "storages.backends.s3boto.S3BotoStorage"
+
+# Use Amazon S3 for static files storage.
+STATICFILES_STORAGE = "require_s3.storage.OptimizedCachedStaticFilesStorage"
+
+# Amazon S3 settings.
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", "")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", "")
+AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME", "")
+AWS_AUTO_CREATE_BUCKET = True
+AWS_HEADERS = {
+    "Cache-Control": "public, max-age=86400",
+}
+AWS_S3_FILE_OVERWRITE = False
+AWS_QUERYSTRING_AUTH = False
+AWS_S3_SECURE_URLS = True
+AWS_REDUCED_REDUNDANCY = False
+AWS_IS_GZIPPED = False
+AWS_PRELOAD_METADATA = True #helps collectstatic do updates
+
+STATIC_URL = 'https://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'grappelli/'
+
+MEDIA_URL = 'https://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
+
+
+# Cache settings.
+CACHES = {
+    # Long cache timeout for staticfiles, since this is used heavily by the optimizing storage.
+    "staticfiles": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+        "TIMEOUT": 60 * 60 * 24 * 365,
+        "LOCATION": "staticfiles",
+    },
+}
+
+###########
+# LOGGING #
+###########
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+}
+##################
+# MAIL SETTINGS #
+##################
+
+# Easy setup with sendgrid.com or similar service
+#EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+#EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+#EMAIL_HOST= "smtp.hostname.com"
+#EMAIL_PORT = 587
+#EMAIL_USE_TLS = True
 
 
 ##################
