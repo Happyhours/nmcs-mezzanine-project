@@ -6,6 +6,7 @@ bleach==1.4
 boto==2.31.1
 dj-database-url==0.3.0
 dj-static==0.0.6
+django-crispy-forms==1.4.0
 django-s3-storages-utils==0.1.0
 django-storages==1.1.8
 django-toolbelt==0.0.1

@@ -108,12 +108,7 @@ MANAGERS = ADMINS
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-#ALLOWED_HOSTS = []
-# Example (From Django documentation):
-ALLOWED_HOSTS = [
-    '.example.com',  # Allow domain and subdomains
-    '.example.com.', # Also allow FQDN and subdomains
-]
+ALLOWED_HOSTS = []
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -389,7 +384,7 @@ NEVERCACHE_KEY = "l3g-vb(ay9y_90xvacv2%ua2&lgrutrdkcrjc*i&6-r5-@bv7x"
 #AWS_STORAGE_BUCKET_NAME = 'bucketname'
 #AWS_PRELOAD_METADATA = True #helps collectstatic do updates
 
-#STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 #DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 #STATIC_URL = 'https://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
@@ -403,7 +398,7 @@ NEVERCACHE_KEY = "l3g-vb(ay9y_90xvacv2%ua2&lgrutrdkcrjc*i&6-r5-@bv7x"
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto.S3BotoStorage"
 
 # Use Amazon S3 for static files storage.
-STATICFILES_STORAGE = "require_s3.storage.OptimizedCachedStaticFilesStorage"
+#STATICFILES_STORAGE = "require_s3.storage.OptimizedCachedStaticFilesStorage"
 
 # Amazon S3 settings.
 AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", "")
@@ -427,14 +422,14 @@ MEDIA_URL = 'https://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
 
 
 # Cache settings.
-CACHES = {
-    # Long cache timeout for staticfiles, since this is used heavily by the optimizing storage.
-    "staticfiles": {
-        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
-        "TIMEOUT": 60 * 60 * 24 * 365,
-        "LOCATION": "staticfiles",
-    },
-}
+# CACHES = {
+#     # Long cache timeout for staticfiles, since this is used heavily by the optimizing storage.
+#     "staticfiles": {
+#         "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+#         "TIMEOUT": 60 * 60 * 24 * 365,
+#         "LOCATION": "staticfiles",
+#     },
+# }
 
 ###########
 # LOGGING #
