@@ -371,8 +371,8 @@ ALLOWED_HOSTS = ['*']
 ##################
 # DJANGO         #
 ##################
-SECRET_KEY = "@51jc&g_-p7r*qkl39)m(-yg(kgqlrw9&xc(3b_!@5ly$#)wq1"
-NEVERCACHE_KEY = "l3g-vb(ay9y_90xvacv2%ua2&lgrutrdkcrjc*i&6-r5-@bv7x"
+SECRET_KEY = os.environ.get("SECRET_KEY", "")
+NEVERCACHE_KEY = os.environ.get("NEVERCACHE_KEY", "")
 
 ###################
 # S3 STATIC FILES #
