@@ -1,0 +1,72 @@
+{% extends "pages/page.html" %}
+
+{% load mezzanine_tags staticfiles %}
+{% load blog_tags %}
+
+
+{% block main %}
+<!-- BEGIN HOME -->
+<section class="call-ta">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-md-12">
+                    {% blog_recent_posts 1 as blog_post %}
+                    {% if blog_post %}
+                        {% for recent_post in blog_post %}
+                            <div class="post-title">
+                                <h2>
+                                    <a style="color:white;" href="{{ recent_post.get_absolute_url }}">
+                                        {{ recent_post.title }}
+                                    </a>
+                                </h2>
+                            </div>
+
+                            <div class="post-content">
+                                {{ recent_post.description_from_content|safe }}
+                            </div>
+
+                            <div class="blog-list-detail">
+                                <p>
+                                    <a class="btn btn-dark medium" href="{{ recent_post.get_absolute_url }}">
+                                        read more
+                                    </a>
+                                </p>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>            
+        </div>
+        <div class="col-sm-6">
+
+            {% for recent_post in blog_post %}
+                {% if recent_post.featured_image %}
+                    <a href="{{ recent_post.get_absolute_url }}">
+                        <img src="{{ MEDIA_URL }}{% thumbnail recent_post.featured_image 500 500 %}">
+                    </a>
+                {% else %}
+                    <div class="feature-image-wrapper">
+                        <a href="{{ home.first.link }}">
+                            <img class="img-responsive img-thumbnail" src="{{ MEDIA_URL }}{% thumbnail page.homepage.image 500 500 %}" alt="action-image">
+                        </a>
+                    </div>
+                {% endif %}
+            {% endfor %}                    
+
+        </div>
+    </div>
+</section>
+<!-- END HOME -->
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
