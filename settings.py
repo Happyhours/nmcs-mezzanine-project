@@ -378,13 +378,46 @@ NEVERCACHE_KEY = os.environ.get("NEVERCACHE_KEY", "")
 # S3 STATIC FILES #
 ###################
 
+# See: http://django-storages.readthedocs.org/en/latest/backends/amazon-S3.html#settings
+STATICFILES_STORAGE = DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
+# See: http://django-storages.readthedocs.org/en/latest/backends/amazon-S3.html#settings
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", "")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", "")
+AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME", "")
+AWS_AUTO_CREATE_BUCKET = True
+AWS_QUERYSTRING_AUTH = False
+
+# see: https://github.com/antonagestam/collectfast
+AWS_PRELOAD_METADATA = True
+#INSTALLED_APPS += ("collectfast", )
+
+# AWS cache settings, don't change unless you know what you're doing:
+AWS_EXPIREY = 60 * 60 * 24 * 7
+AWS_HEADERS = {
+    'Cache-Control': 'max-age=%d, s-maxage=%d, must-revalidate' % (AWS_EXPIREY,
+        AWS_EXPIREY)
+}
+
+MEDIA_ROOT = ""
+
+STATIC_URL = 'http://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'grappelli/'
+MEDIA_URL = STATIC_URL + 'media/'
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
+#STATIC_URL = 'https://s3.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
+########## END STORAGE CONFIGURATION
+
+
+
 #AWS_QUERYSTRING_AUTH = False
 #AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 #AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 #AWS_STORAGE_BUCKET_NAME = 'bucketname'
 #AWS_PRELOAD_METADATA = True #helps collectstatic do updates
 
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+#STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 #DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 #STATIC_URL = 'https://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
@@ -395,30 +428,30 @@ STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 
 # Use Amazon S3 for storage for uploaded media files.
-DEFAULT_FILE_STORAGE = "storages.backends.s3boto.S3BotoStorage"
+#DEFAULT_FILE_STORAGE = "storages.backends.s3boto.S3BotoStorage"
 
 # Use Amazon S3 for static files storage.
 #STATICFILES_STORAGE = "require_s3.storage.OptimizedCachedStaticFilesStorage"
 
 # Amazon S3 settings.
-AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", "")
-AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", "")
-AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME", "")
-AWS_AUTO_CREATE_BUCKET = True
-AWS_HEADERS = {
-    "Cache-Control": "public, max-age=86400",
-}
-AWS_S3_FILE_OVERWRITE = False
-AWS_QUERYSTRING_AUTH = False
-AWS_S3_SECURE_URLS = True
-AWS_REDUCED_REDUNDANCY = False
-AWS_IS_GZIPPED = False
-AWS_PRELOAD_METADATA = True #helps collectstatic do updates
+# AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", "")
+# AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", "")
+# AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME", "")
+# AWS_AUTO_CREATE_BUCKET = True
+# AWS_HEADERS = {
+#     "Cache-Control": "public, max-age=86400",
+# }
+# AWS_S3_FILE_OVERWRITE = False
+# AWS_QUERYSTRING_AUTH = False
+# AWS_S3_SECURE_URLS = True
+# AWS_REDUCED_REDUNDANCY = False
+# AWS_IS_GZIPPED = False
+# AWS_PRELOAD_METADATA = True #helps collectstatic do updates
 
-STATIC_URL = 'https://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
-ADMIN_MEDIA_PREFIX = STATIC_URL + 'grappelli/'
+# STATIC_URL = 'https://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
+# ADMIN_MEDIA_PREFIX = STATIC_URL + 'grappelli/'
 
-MEDIA_URL = 'https://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
+# MEDIA_URL = 'https://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
 
 
 # Cache settings.
