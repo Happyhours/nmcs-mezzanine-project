@@ -388,13 +388,7 @@ NEVERCACHE_KEY = os.environ.get("NEVERCACHE_KEY", "")
 
 
 
-STATIC_URL = 'https://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
-STATIC_ROOT = STATIC_URL
 
-MEDIA_URL = STATIC_URL + "media/"
-
-MEDIA_ROOT = ""
-ADMIN_MEDIA_PREFIX = STATIC_URL + 'grappelli/'
 
 
 DEFAULT_FILE_STORAGE = 's3utils.MediaRootS3BotoStorage'
@@ -417,6 +411,14 @@ AWS_HEADERS = {
     'Cache-Control': 'max-age=%d, s-maxage=%d, must-revalidate' % (AWS_EXPIREY,
         AWS_EXPIREY)
 }
+
+STATIC_URL = 'https://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
+STATIC_ROOT = STATIC_URL
+
+MEDIA_URL = STATIC_URL + "media/"
+
+MEDIA_ROOT = ""
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'grappelli/'
 
 
 
