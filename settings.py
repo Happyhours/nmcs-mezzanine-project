@@ -401,9 +401,12 @@ AWS_HEADERS = {
 
 MEDIA_ROOT = ""
 
-STATIC_URL = 'http://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
+STATIC_URL = 'https://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/static/'
+MEDIA_URL = 'https://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/media/'
+
+
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'grappelli/'
-MEDIA_URL = STATIC_URL + 'media/'
+
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 #STATIC_URL = 'https://s3.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
