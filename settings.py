@@ -266,7 +266,6 @@ INSTALLED_APPS = (
     #"mezzanine.accounts",
     #"mezzanine.mobile",
     'crispy_forms',
-    'storages',
     'gunicorn',
 )
 
@@ -375,23 +374,51 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "")
 NEVERCACHE_KEY = os.environ.get("NEVERCACHE_KEY", "")
 
 ###################
-# S3 STATIC FILES #
+# S3 STATIC FILES NEW SETTINGS #
 ###################
 
+#
+# django-storages settings
 # See: http://django-storages.readthedocs.org/en/latest/backends/amazon-S3.html#settings
-STATICFILES_STORAGE = DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+#
+
+INSTALLED_APPS += ('storages',)
+
+# The STATICFILES_STORAGE setting controls how the files are aggregated together.
+# The default value is django.contrib.staticfiles.storage.StaticFilesStorage 
+# which will copy the collected files to the directory specified by STATIC_ROOT.
+#
+# To allow django-admin.py collectstatic to automatically put your static files in 
+# your bucket set the following in your settings.py:
+#
+# STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+#
+# This STATICFILES_STORAGE may decide where to copy all the collected files in a
+# other way (Thus STATIC_ROOT maybe is not even used with this STATICFILES_STORAGE???)
+#
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
+
+#Default: django.core.files.storage.FileSystemStorage
+#Default file storage class to be used for any file-related operations that don’t 
+#specify a particular storage system. See Managing files.
+#
+# What does this S3BotoStorage do differently from the default???
+#
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 # See: http://django-storages.readthedocs.org/en/latest/backends/amazon-S3.html#settings
 AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", "")
 AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", "")
 AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME", "")
-AWS_AUTO_CREATE_BUCKET = True
-AWS_QUERYSTRING_AUTH = False
 
-# see: https://github.com/antonagestam/collectfast
-AWS_PRELOAD_METADATA = True
-#INSTALLED_APPS += ("collectfast", )
+# s3boto already has subdomain set on default so no need to change or touch this
+# Subdomain = <BUCKETNAME>.s3.amazonaws.com/
+#AWS_CALLING_FORMAT 
 
+
+# AWS_HEADERS (optional)
+# From: https://github.com/pydanny/cookiecutter-django/ 
 # AWS cache settings, don't change unless you know what you're doing:
 AWS_EXPIREY = 60 * 60 * 24 * 7
 AWS_HEADERS = {
@@ -399,11 +426,61 @@ AWS_HEADERS = {
         AWS_EXPIREY)
 }
 
-MEDIA_ROOT = ""
+# Not sure on this yet
+AWS_QUERYSTRING_AUTH = False
 
-STATIC_URL = 'http://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
-ADMIN_MEDIA_PREFIX = STATIC_URL + 'grappelli/'
-MEDIA_URL = STATIC_URL + 'media/'
+# When I first put up the site and watched it get indexed by Google, 
+# I noticed that these uploaded images weren’t displayed in the cached previews of pages. 
+# Okay, I thought, it’s probably because Google takes longer to index images with new sites.
+
+# A couple weeks passed. Still no images showing in preview. It turns out that Google 
+# wasn’t indexing the images because they were being served through django-storages and 
+# s3boto over https. As an  aside, it’s sort of interesting that Google takes the approach 
+# of not indexing secure-served images. Or maybe it’s just https with S3. Oh well. 
+# It’s also interesting that the s3boto backend defaults to returning secure s3 objects.
+
+# But anyway, in order to force s3boto to return s3 objects over http, 
+# you need to add this to your settings.py:
+
+# AWS_S3_SECURE_URLS = False
+
+# Almost immediately after making this change, the Google cached previews changed to showing the non-secured images.
+AWS_S3_SECURE_URLS = False
+
+AWS_S3_ENCRYPTION = False
+
+
+
+###################
+# S3 STATIC FILES #
+###################
+
+# See: http://django-storages.readthedocs.org/en/latest/backends/amazon-S3.html#settings
+#STATICFILES_STORAGE = DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
+# See: http://django-storages.readthedocs.org/en/latest/backends/amazon-S3.html#settings
+# AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", "")
+# AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", "")
+# AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME", "")
+# AWS_AUTO_CREATE_BUCKET = True
+# AWS_QUERYSTRING_AUTH = False
+
+# see: https://github.com/antonagestam/collectfast
+#AWS_PRELOAD_METADATA = True
+#INSTALLED_APPS += ("collectfast", )
+
+# AWS cache settings, don't change unless you know what you're doing:
+# AWS_EXPIREY = 60 * 60 * 24 * 7
+# AWS_HEADERS = {
+#     'Cache-Control': 'max-age=%d, s-maxage=%d, must-revalidate' % (AWS_EXPIREY,
+#         AWS_EXPIREY)
+# }
+
+#MEDIA_ROOT = ""
+
+#STATIC_URL = 'http://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
+#ADMIN_MEDIA_PREFIX = STATIC_URL + 'grappelli/'
+#MEDIA_URL = STATIC_URL + 'media/'
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 #STATIC_URL = 'https://s3.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
