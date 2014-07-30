@@ -27,6 +27,15 @@
                         <div class="pict">
                             <img src="{{ MEDIA_URL }}{% thumbnail employee.image 200 200 %}" alt="Team 1">
                         </div>
+                        <div class="pict">
+                            <img src="{% thumbnail employee.image 200 200 %}" alt="Team 1">
+                        </div>
+                        <div class="pict">
+                            <img src="{% static 'employee.image'%}" alt="Team 1">
+                        </div>
+                        <div class="pict">
+                            <img src="{% static 'employee.image.url'%}" alt="Team 1">
+                        </div>
                         <div class="desc">
                             <h3 style="padding-bottom:30px;">{{ employee.name }}</h3>
                             <span style="padding-bottom:30px;">{{ employee.position }}</span>
