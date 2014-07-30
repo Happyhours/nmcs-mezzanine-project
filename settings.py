@@ -449,22 +449,10 @@ ADMIN_MEDIA_PREFIX = STATIC_URL + 'grappelli/'
 #        AWS_EXPIREY)
 #}
 
-# When I first put up the site and watched it get indexed by Google, 
-# I noticed that these uploaded images weren’t displayed in the cached previews of pages. 
-# Okay, I thought, it’s probably because Google takes longer to index images with new sites.
-
-# A couple weeks passed. Still no images showing in preview. It turns out that Google 
-# wasn’t indexing the images because they were being served through django-storages and 
-# s3boto over https. As an  aside, it’s sort of interesting that Google takes the approach 
-# of not indexing secure-served images. Or maybe it’s just https with S3. Oh well. 
-# It’s also interesting that the s3boto backend defaults to returning secure s3 objects.
 
 # But anyway, in order to force s3boto to return s3 objects over http, 
 # you need to add this to your settings.py:
-
 # AWS_S3_SECURE_URLS = False
-
-# Almost immediately after making this change, the Google cached previews changed to showing the non-secured images.
 
 
 
