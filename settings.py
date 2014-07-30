@@ -420,6 +420,8 @@ AWS_PRELOAD_METADATA = True #helps collectstatic do updates
 #AWS_S3_SECURE_URLS=False
 #AWS_AUTO_CREATE_BUCKET = True #better to create own bucket with right region then auto-create on us-region.
 
+#MEDIA_ROOT = "" #try to set this to empty string, if base settings does not work.
+
 STATIC_URL = '//' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
 MEDIA_URL = '//' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'grappelli/'
