@@ -374,43 +374,65 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "")
 NEVERCACHE_KEY = os.environ.get("NEVERCACHE_KEY", "")
 
 ###################
-# S3 STATIC FILES NEW SETTINGS #
+# S3 STATIC FILES #
 ###################
+
+# KNOWN BUGS -- https://www.mail-archive.com/mezzanine-users@googlegroups.com/msg01543.html
+# July 30, 2014
+#
+# (1.)
+# https://github.com/boto/boto/issues/1477
+#
+# (2.)
+# https://bitbucket.org/david/django-storages/issue/181/from-s3-import-callingformat-seems-broke
+# 
+# try:
+#     from S3 import CallingFormat
+#     AWS_CALLING_FORMAT = CallingFormat.SUBDOMAIN
+# except ImportError:
+#     # TODO: Fix this where even if in Dev this class is called.
+#     pass
+# 
+# The below link explains some of the settings in Boto which you can configure tp optimise etc.
+# http://www.laurii.info/2013/05/improve-s3boto-djangostorages-performance-custom-settings/
+#
+
 
 #
 # django-storages settings
 # See: http://django-storages.readthedocs.org/en/latest/backends/amazon-S3.html#settings
 #
-
 INSTALLED_APPS += ('storages',)
 
-# The STATICFILES_STORAGE setting controls how the files are aggregated together.
-# The default value is django.contrib.staticfiles.storage.StaticFilesStorage 
-# which will copy the collected files to the directory specified by STATIC_ROOT.
-#
-# To allow django-admin.py collectstatic to automatically put your static files in 
-# your bucket set the following in your settings.py:
-#
-# STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-#
-# This STATICFILES_STORAGE may decide where to copy all the collected files in a
-# other way (Thus STATIC_ROOT maybe is not even used with this STATICFILES_STORAGE???)
-#
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+# See: http://django-storages.readthedocs.org/en/latest/backends/amazon-S3.html#settings
+STATICFILES_STORAGE = DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
-
-#Default: django.core.files.storage.FileSystemStorage
-#Default file storage class to be used for any file-related operations that don’t 
-#specify a particular storage system. See Managing files.
-#
-# What does this S3BotoStorage do differently from the default???
-#
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 # See: http://django-storages.readthedocs.org/en/latest/backends/amazon-S3.html#settings
 AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", "")
 AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", "")
 AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME", "")
+
+AWS_QUERYSTRING_AUTH = False #This will make sure that the URLs to the files are generated WITHOUT the extra parameters.
+AWS_PRELOAD_METADATA = True #helps collectstatic do updates
+#AWS_S3_SECURE_URLS = False
+#AWS_S3_ENCRYPTION =  False
+#AWS_S3_SECURE_URLS=False
+#AWS_AUTO_CREATE_BUCKET = True #better to create own bucket with right region then auto-create on us-region.
+
+STATIC_URL = '//' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
+MEDIA_URL = '//' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'grappelli/'
+
+# Only used if you want to push all files with collectstatic from developer env to S3 or some place. 
+#STATIC_ROOT = 'DOESNOTMATTER' 
+#MEDIA_ROOT = 'DOESNOTMATTER' 
+
+
+
+############################
+# ADVANCED S3 STATIC FILES #
+############################
 
 # s3boto already has subdomain set on default so no need to change or touch this
 # Subdomain = <BUCKETNAME>.s3.amazonaws.com/
@@ -420,14 +442,11 @@ AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME", "")
 # AWS_HEADERS (optional)
 # From: https://github.com/pydanny/cookiecutter-django/ 
 # AWS cache settings, don't change unless you know what you're doing:
-AWS_EXPIREY = 60 * 60 * 24 * 7
-AWS_HEADERS = {
-    'Cache-Control': 'max-age=%d, s-maxage=%d, must-revalidate' % (AWS_EXPIREY,
-        AWS_EXPIREY)
-}
-
-# Not sure on this yet
-AWS_QUERYSTRING_AUTH = False
+#AWS_EXPIREY = 60 * 60 * 24 * 7
+#AWS_HEADERS = {
+#    'Cache-Control': 'max-age=%d, s-maxage=%d, must-revalidate' % (AWS_EXPIREY,
+#        AWS_EXPIREY)
+#}
 
 # When I first put up the site and watched it get indexed by Google, 
 # I noticed that these uploaded images weren’t displayed in the cached previews of pages. 
@@ -445,101 +464,8 @@ AWS_QUERYSTRING_AUTH = False
 # AWS_S3_SECURE_URLS = False
 
 # Almost immediately after making this change, the Google cached previews changed to showing the non-secured images.
-AWS_S3_SECURE_URLS = False
-
-AWS_S3_ENCRYPTION = False
 
 
-
-###################
-# S3 STATIC FILES #
-###################
-
-# See: http://django-storages.readthedocs.org/en/latest/backends/amazon-S3.html#settings
-#STATICFILES_STORAGE = DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-
-# See: http://django-storages.readthedocs.org/en/latest/backends/amazon-S3.html#settings
-# AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", "")
-# AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", "")
-# AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME", "")
-# AWS_AUTO_CREATE_BUCKET = True
-# AWS_QUERYSTRING_AUTH = False
-
-# see: https://github.com/antonagestam/collectfast
-#AWS_PRELOAD_METADATA = True
-#INSTALLED_APPS += ("collectfast", )
-
-# AWS cache settings, don't change unless you know what you're doing:
-# AWS_EXPIREY = 60 * 60 * 24 * 7
-# AWS_HEADERS = {
-#     'Cache-Control': 'max-age=%d, s-maxage=%d, must-revalidate' % (AWS_EXPIREY,
-#         AWS_EXPIREY)
-# }
-
-#MEDIA_ROOT = ""
-
-#STATIC_URL = 'http://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
-#ADMIN_MEDIA_PREFIX = STATIC_URL + 'grappelli/'
-#MEDIA_URL = STATIC_URL + 'media/'
-
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
-#STATIC_URL = 'https://s3.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
-########## END STORAGE CONFIGURATION
-
-
-
-#AWS_QUERYSTRING_AUTH = False
-#AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-#AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-#AWS_STORAGE_BUCKET_NAME = 'bucketname'
-#AWS_PRELOAD_METADATA = True #helps collectstatic do updates
-
-#STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-#DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-
-#STATIC_URL = 'https://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
-#ADMIN_MEDIA_PREFIX = STATIC_URL + 'grappelli/'
-
-#MEDIA_URL = 'https://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
-
-
-
-# Use Amazon S3 for storage for uploaded media files.
-#DEFAULT_FILE_STORAGE = "storages.backends.s3boto.S3BotoStorage"
-
-# Use Amazon S3 for static files storage.
-#STATICFILES_STORAGE = "require_s3.storage.OptimizedCachedStaticFilesStorage"
-
-# Amazon S3 settings.
-# AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", "")
-# AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", "")
-# AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME", "")
-# AWS_AUTO_CREATE_BUCKET = True
-# AWS_HEADERS = {
-#     "Cache-Control": "public, max-age=86400",
-# }
-# AWS_S3_FILE_OVERWRITE = False
-# AWS_QUERYSTRING_AUTH = False
-# AWS_S3_SECURE_URLS = True
-# AWS_REDUCED_REDUNDANCY = False
-# AWS_IS_GZIPPED = False
-# AWS_PRELOAD_METADATA = True #helps collectstatic do updates
-
-# STATIC_URL = 'https://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
-# ADMIN_MEDIA_PREFIX = STATIC_URL + 'grappelli/'
-
-# MEDIA_URL = 'https://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
-
-
-# Cache settings.
-# CACHES = {
-#     # Long cache timeout for staticfiles, since this is used heavily by the optimizing storage.
-#     "staticfiles": {
-#         "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
-#         "TIMEOUT": 60 * 60 * 24 * 365,
-#         "LOCATION": "staticfiles",
-#     },
-# }
 
 ###########
 # LOGGING #
