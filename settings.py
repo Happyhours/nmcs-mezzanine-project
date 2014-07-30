@@ -228,7 +228,7 @@ MEDIA_URL = STATIC_URL + "media/"
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, *MEDIA_URL.strip("/").split("/"))
+#MEDIA_ROOT = os.path.join(PROJECT_ROOT, *MEDIA_URL.strip("/").split("/"))
 
 # Package/module name to import the root urlpatterns from for the project.
 ROOT_URLCONF = "%s.urls" % PROJECT_DIRNAME
@@ -403,6 +403,8 @@ NEVERCACHE_KEY = os.environ.get("NEVERCACHE_KEY", "")
 # See: http://django-storages.readthedocs.org/en/latest/backends/amazon-S3.html#settings
 #
 INSTALLED_APPS += ('storages',)
+
+# Also uninstall filebrowser-safe to default django with bin/post_compile.py heroku hook
 
 # See: http://django-storages.readthedocs.org/en/latest/backends/amazon-S3.html#settings
 STATICFILES_STORAGE = DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
