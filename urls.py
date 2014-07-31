@@ -8,6 +8,10 @@ from django.views.defaults import page_not_found
 from mezzanine.core.views import direct_to_template
 
 
+from django.template import add_to_builtins
+add_to_builtins('smart_load_tag.templatetags.smart_load')
+
+
 admin.autodiscover()
 
 # Add the urlpatterns for any custom Django applications here.

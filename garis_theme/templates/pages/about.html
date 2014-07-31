@@ -1,6 +1,6 @@
 {% extends "pages/page.html" %}
 
-{% load smart_load %}
+
 {% load mezzanine_tags staticfiles %}
 
 
@@ -28,6 +28,12 @@
                 {% for employee in page.aboutpage.employee_set.all %}
                 <div class="col-md-4">
                     <div class="teams">
+
+                        <div class="pict">
+                        {% sorl_thumbnail employee "200x200" as im %}
+                            <img src="{{ im.image }}" alt="Team 1">
+                        {% endthumbnail %}
+                        </div>
 
                         <div class="pict">
                         {% sorl_thumbnail employee.image "200x200" as im %}
