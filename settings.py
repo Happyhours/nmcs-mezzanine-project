@@ -388,6 +388,17 @@ NEVERCACHE_KEY = os.environ.get("NEVERCACHE_KEY", "")
 INSTALLED_APPS += ('smart_load_tag',)
 
 
+
+
+
+###################
+# CACHE #
+###################
+from memcacheify import memcacheify
+
+CACHES = memcacheify()
+
+
 ###################
 # S3 STATIC FILES #
 ###################
