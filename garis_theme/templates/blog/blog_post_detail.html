@@ -38,7 +38,11 @@
                             {% block blog_post_detail_featured_image %}
                             {% if settings.BLOG_USE_FEATURED_IMAGE and blog_post.featured_image %}
                             <a href="{{ blog_post.get_absolute_url }}">
-                                <img class="img-responsive" src="{{ MEDIA_URL }}{% thumbnail blog_post.featured_image 600 0 %}">
+
+                                {% sorl_thumbnail blog_post.featured_image "800x550" as im %}
+                                    <img class="img-responsive" src="{{ im.url }}" alt="Team 1">
+                                {% endthumbnail %}
+
                             </a>
                             {% endif %}
                             {% endblock %}

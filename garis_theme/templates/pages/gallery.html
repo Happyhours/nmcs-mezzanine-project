@@ -2,6 +2,9 @@
 
 {% load mezzanine_tags staticfiles %}
 
+{% load smart_load %}
+{% load thumbnail from sorl.thumbnail as sorl_thumbnail %}
+
 {% block main %}
 {{ block.super }}
 
@@ -13,10 +16,18 @@
             {% with page.gallery.images.all as images %}
             {% for image in images %}
                 <div class="col-md-4 col-xs-6 portfolio-item websites">
-                    <a class="popup" rel="#image-{{ image.id }}" title="{{ image.description }}" href="{{ image.file.url }}">
+                    <a class="popup" rel="#image-{{ image.id }}" title="{{ image.description }}" 
+
+                    href="{% sorl_thumbnail image.file '600×600' as im %}{{ im.url }}{% endthumbnail %}">
+
                         <span class="project-hover">
                             <span>{{ image.description }}</span>
                         </span>
+                        
+                        {% sorl_thumbnail image.file "300×300" as im %}
+                            <img src="{{ im }}" alt="Team 1">
+                        {% endthumbnail %}
+                        
                         <img src="{{ MEDIA_URL }}{% thumbnail image.file 131 75 %}">
                     </a>
                 </div>

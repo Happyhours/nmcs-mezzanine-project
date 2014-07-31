@@ -3,6 +3,9 @@
 {% load mezzanine_tags staticfiles %}
 {% load blog_tags %}
 
+{% load smart_load %}
+{% load thumbnail from sorl.thumbnail as sorl_thumbnail %}
+
 
 {% block main %}
 <!-- BEGIN HOME -->
@@ -42,13 +45,21 @@
 
             {% for recent_post in blog_post %}
                 {% if recent_post.featured_image %}
+                    
                     <a href="{{ recent_post.get_absolute_url }}">
-                        <img src="{{ MEDIA_URL }}{% thumbnail recent_post.featured_image 500 500 %}">
+                    {% sorl_thumbnail recent_post.featured_image "500x500" as im %}
+                        <img src="{{ im.url }}" alt="Team 1">
+                    {% endthumbnail %}
                     </a>
+
                 {% else %}
                     <div class="feature-image-wrapper">
                         <a href="{{ home.first.link }}">
-                            <img class="img-responsive img-thumbnail" src="{{ MEDIA_URL }}{% thumbnail page.homepage.image 500 500 %}" alt="action-image">
+
+                            {% sorl_thumbnail page.homepage.image "500x500" as im %}
+                                <img class="img-responsive img-thumbnail" src="{{ im.url }}" alt="action-image">
+                            {% endthumbnail %}
+                            
                         </a>
                     </div>
                 {% endif %}

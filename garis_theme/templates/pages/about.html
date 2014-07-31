@@ -3,7 +3,7 @@
 
 {% load mezzanine_tags staticfiles %}
 
-
+{% load smart_load %}
 {% load thumbnail from sorl.thumbnail as sorl_thumbnail %}
 
 {% block main %}
@@ -30,47 +30,11 @@
                     <div class="teams">
 
                         <div class="pict">
-                        {% sorl_thumbnail employee "200x200" as im %}
-                            <img src="{{ im.image }}" alt="Team 1">
-                        {% endthumbnail %}
-                        </div>
-
-                        <div class="pict">
-                        {% sorl_thumbnail employee.image "200x200" as im %}
-                            <img src="{{ im.image }}" alt="Team 1">
-                        {% endthumbnail %}
-                        </div>
-
-                        <div class="pict">
-                        {% sorl_thumbnail employee.image "200x200" as im %}
-                            <img src="{{ im.image.url }}" alt="Team 1">
-                        {% endthumbnail %}
-                        </div>
-
-                        <div class="pict">
-                        {% sorl_thumbnail employee.image "200x200" as im %}
+                        {% sorl_thumbnail employee.image "400x325" as im %}
                             <img src="{{ im.url }}" alt="Team 1">
                         {% endthumbnail %}
                         </div>
-
-                        <div class="pict">
-                        {% sorl_thumbnail employee.image "100x100" as im %}
-                            <img src="{{ im.url }}" alt="Team 1">
-                        {% endthumbnail %}
-                        </div>
-
-                        <div class="pict">
-                            <img src="{{ MEDIA_URL }}{% thumbnail employee.image 200 200 %}" alt="Team 1">
-                        </div>
-                        <div class="pict">
-                            <img src="{% thumbnail employee.image 200 200 %}" alt="Team 1">
-                        </div>
-                        <div class="pict">
-                            <img src="{% static 'employee.image'%}" alt="Team 1">
-                        </div>
-                        <div class="pict">
-                            <img src="{% static 'employee.image.url'%}" alt="Team 1">
-                        </div>
+                        
                         <div class="desc">
                             <h3 style="padding-bottom:30px;">{{ employee.name }}</h3>
                             <span style="padding-bottom:30px;">{{ employee.position }}</span>

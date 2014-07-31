@@ -2,6 +2,9 @@
 
 {% load mezzanine_tags staticfiles garis_theme_extra%}
 
+{% load smart_load %}
+{% load thumbnail from sorl.thumbnail as sorl_thumbnail %}
+
 
 {% block main %}
 {{ block.super }}
@@ -19,7 +22,9 @@
                     <div class="teams">
                         <!--
                         <div class="pict">
-                            <img src="{{ MEDIA_URL }}{% thumbnail item.image 200 200 %}" alt="Team 1">
+                        {% sorl_thumbnail thumbnail item.image.url "400x325" as im %}
+                            <img src="{{ im.url }}" alt="Team 1">
+                        {% endthumbnail %}
                         </div>
                         -->
                         <div class="desc">

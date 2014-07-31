@@ -2,6 +2,9 @@
 <html lang="{{ LANGUAGE_CODE }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %}>
 {% load pages_tags mezzanine_tags i18n future staticfiles garis_theme_extra %}
 
+{% load smart_load %}
+{% load thumbnail from sorl.thumbnail as sorl_thumbnail %}
+
 <head>
     <!-- GARIS THEME -->
     <!-- PACE Loader -->
@@ -192,7 +195,12 @@
                     <ul class="client-slider">
                         {% for partner_image in sitewide.partnerimage_set.all %}
                         <li>
-                            <img class="img-thumbnail" src="{{ MEDIA_URL }}{% thumbnail partner_image.image 100 100 %}" href="{{ partner_image.link }}" alt="{{ partner_image.link }}">
+                            
+                            {% sorl_thumbnail partner_image "100x100" as im %}
+                                <img class="img-thumbnail" src="{{ im.image.url }}" alt="Partners"
+                                href="{{ im.link }}" alt="{{ im.link }}">
+                            {% endthumbnail %}
+
                         </li>
                         {% endfor %}
                     </ul>

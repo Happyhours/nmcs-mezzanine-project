@@ -1,6 +1,9 @@
 {% extends "pages/page.html" %}
 
 {% load mezzanine_tags staticfiles %}
+{% load smart_load %}
+{% load thumbnail from sorl.thumbnail as sorl_thumbnail %}
+
 
 {% block main %}
 <!-- BEGIN SERVICES -->
@@ -50,7 +53,10 @@
                 {% for item in page.servicespage.slide_set.all %}
                     <div>
                         <a href="{{ item.link_to_image }}">
-                            <img src="{{ MEDIA_URL }}{% thumbnail item.image 200 200 %}" alt="image description" />
+
+                            {% sorl_thumbnail item.image "500x500" as im %}
+                                <img src="{{ im.url }}" alt="Partners">
+                            {% endthumbnail %}
                         </a>
                     </div>
                 {% endfor %}
