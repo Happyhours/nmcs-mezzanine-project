@@ -101,7 +101,7 @@
 <div class="post-thumb">
     <a href="{{ blog_post.get_absolute_url }}">
 
-        {% sorl_thumbnail blog_post.featured_image "x250" as im %}
+        {% sorl_thumbnail blog_post.featured_image "500x500" as im %}
             <img src="{{ im.url }}" alt="Blog post">
         {% endthumbnail %}
 
