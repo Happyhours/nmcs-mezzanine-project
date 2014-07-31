@@ -373,6 +373,21 @@ ALLOWED_HOSTS = ['*']
 SECRET_KEY = os.environ.get("SECRET_KEY", "")
 NEVERCACHE_KEY = os.environ.get("NEVERCACHE_KEY", "")
 
+
+#####################
+# CUSTOM THUMBNAILS #
+# THAT WORK WITH S3 #
+#####################
+
+#
+# Bypass Mezzanines default thumbnails code by installing django-smart-load-tag
+# and using sorl-thumbnails or easy_thumbnails etc without ugly hacks
+#
+# See: https://github.com/codysoyland/django-smart-load-tag
+#
+INSTALLED_APPS += ('smart_load_tag',)
+
+
 ###################
 # S3 STATIC FILES #
 ###################
