@@ -387,6 +387,12 @@ NEVERCACHE_KEY = os.environ.get("NEVERCACHE_KEY", "")
 #
 INSTALLED_APPS += ('smart_load_tag',)
 
+#
+# Use sorl-thumbnail instead of Mezzanines default one that does not work with S3
+#
+# See: http://sorl-thumbnail.readthedocs.org
+#
+INSTALLED_APPS += ('sorl.thumbnail',)
 
 
 

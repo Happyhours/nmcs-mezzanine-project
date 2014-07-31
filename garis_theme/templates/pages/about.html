@@ -2,6 +2,9 @@
 
 {% load mezzanine_tags staticfiles %}
 
+{% smart_load %}
+{% load thumbnail from sorl.thumbnail as sorl_thumbnail %}
+
 {% block main %}
 <!-- BEGIN ABOUT -->
 <section id="about" class="about odd">
@@ -24,6 +27,19 @@
                 {% for employee in page.aboutpage.employee_set.all %}
                 <div class="col-md-4">
                     <div class="teams">
+
+                        <div class="pict">
+                        {% sorl_thumbnail employee.image "200x200" as im %}
+                            <img src="{{ im.url }}" alt="Team 1">
+                        {% endthumbnail %}
+                        </div>
+
+                        <div class="pict">
+                        {% sorl_thumbnail employee.image "100x100" as im %}
+                            <img src="{{ im.url }}" alt="Team 1">
+                        {% endthumbnail %}
+                        </div>
+
                         <div class="pict">
                             <img src="{{ MEDIA_URL }}{% thumbnail employee.image 200 200 %}" alt="Team 1">
                         </div>
