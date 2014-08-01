@@ -512,6 +512,18 @@ LOGGING = {
 #EMAIL_USE_TLS = True
 
 
+# EMAIL_BACKEND = 'django_ses.SESBackend' 
+# AWS_ACCESS_KEY_ID = 'LONGSTRINGHERE' 
+# AWS_SECRET_ACCESS_KEY = 'EVENLONGERSTRINGHERE' 
+# EMAIL_HOST_USER = 'MYAMAZONSESUSER' 
+# EMAIL_USE_TLS = True 
+# EMAIL_HOST = 'email-smtp.us-east-1.amazonaws.com' 
+# # The next two lines may not be required; try without them first. 
+# DEFAULT_FROM_EMAIL = SERVER_EMAIL = 'you@yourdomain.com' 
+# FORMS_DISABLE_SEND_FROM_EMAIL_FIELD = True 
+# # The next line is not required, but may be useful. 
+# SEND_BROKEN_LINK_EMAILS = True
+
 ##################
 # LOCAL SETTINGS #
 ##################
