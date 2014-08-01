@@ -40,12 +40,7 @@
 </section>
 <!-- END CONTACT -->
 
-<!-- BEGIN MAP -->
-{% for data in page.contactpage.contactmap_set.all %}
-<section class="map" id="map" data-lat='{{ data.latitude }}' data-lng='{{ data.longitude }}' data-address="{{ data.address }}" data-color="{{ data.color }}">
-</section>
-{% endfor %}
-<!-- END MAP -->
+
 
 
 {% endblock %}
