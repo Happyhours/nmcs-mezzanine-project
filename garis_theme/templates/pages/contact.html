@@ -1,6 +1,6 @@
 {% extends "pages/page.html" %}
 
-{% load mezzanine_tags staticfiles crispy_forms_tags %}
+{% load mezzanine_tags staticfiles  %}
 
 
 {% block main %}
@@ -25,7 +25,7 @@
 
         <div class="col-sm-6 col-md-8">
             <form action="." method="post">{% csrf_token %}
-            {% crispy form %}
+            
             </form>
         </div>
 
