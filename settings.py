@@ -265,7 +265,7 @@ INSTALLED_APPS = (
     "mezzanine.twitter",
     #"mezzanine.accounts",
     #"mezzanine.mobile",
-    'crispy_forms',
+    #'crispy_forms',
     'gunicorn',
 )
 
