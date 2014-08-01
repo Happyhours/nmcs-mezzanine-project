@@ -1,46 +1,46 @@
-from django import forms
-from django.http import HttpResponseRedirect
-from mezzanine.pages.page_processors import processor_for
+# from django import forms
+# from django.http import HttpResponseRedirect
+# from mezzanine.pages.page_processors import processor_for
 
-from django.core.mail import send_mail
-from garis_theme.models import (
-    ContactPage,
-    PortfolioPage,
-)
+# from django.core.mail import send_mail
+# from garis_theme.models import (
+#     ContactPage,
+#     PortfolioPage,
+# )
 
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import (
-    Submit,
-    Reset,
-    Layout, 
-    Field,
-    Div,
-)
-from crispy_forms.bootstrap import (
-    FormActions,
-)
+# from crispy_forms.helper import FormHelper
+# from crispy_forms.layout import (
+#     Submit,
+#     Reset,
+#     Layout, 
+#     Field,
+#     Div,
+# )
+# from crispy_forms.bootstrap import (
+#     FormActions,
+# )
 #from captcha.fields import CaptchaField
-from simplemathcaptcha.fields import MathCaptchaField
-from simplemathcaptcha.widgets import MathCaptchaWidget
+# from simplemathcaptcha.fields import MathCaptchaField
+# from simplemathcaptcha.widgets import MathCaptchaWidget
 
 
-class ContactForm(forms.Form):
+# class ContactForm(forms.Form):
 
-    name = forms.CharField()
-    email = forms.EmailField()
-    subject = forms.CharField(max_length=100)
-    message = forms.CharField(widget=forms.Textarea())
-    captcha = MathCaptchaField(
-        error_messages={
-            'invalid': 'Fel svar var god försök igen.',
-            'invalid_number': 'Var god ange heltal endast.',
-            'required': 'Fyll i Captcha fältet', 
-        },
-        widget=MathCaptchaWidget(
-            attrs={'class': 'form-control'},
-            question_tmpl = ('Vad är %(num1)i %(operator)s %(num2)i?')
-        )
-    )
+#     name = forms.CharField()
+#     email = forms.EmailField()
+#     subject = forms.CharField(max_length=100)
+#     message = forms.CharField(widget=forms.Textarea())
+#     captcha = MathCaptchaField(
+#         error_messages={
+#             'invalid': 'Fel svar var god försök igen.',
+#             'invalid_number': 'Var god ange heltal endast.',
+#             'required': 'Fyll i Captcha fältet', 
+#         },
+#         widget=MathCaptchaWidget(
+#             attrs={'class': 'form-control'},
+#             question_tmpl = ('Vad är %(num1)i %(operator)s %(num2)i?')
+#         )
+#     )
 
     # helper = FormHelper()
     # helper.form_tag = False
