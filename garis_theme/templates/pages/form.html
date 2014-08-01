@@ -10,6 +10,15 @@
 <section id="contact" class="contact odd">
     <div class="row">
 
+        <div class="col-md-12 mg-bt-40">
+            <div class="header-content">
+                <h2>Kontakta oss</h2>
+            </div>
+            <p>Kontakta oss genom att skicka ett mail nedanför, eller använd informationen till höger. 
+                Du hittar även en <a href="javascript:;">karta</a> och <a href="javascript:;">öppettider</a> längre ner på sidan
+            </p>
+        </div>
+
         <div class="col-sm-2 col-md-4 pull-right">
             {% with page.form as page_form %}
             {% editable page_form.content %}
@@ -39,7 +48,10 @@
     </div>
 </section>
 <!-- END CONTACT -->
-
+<!-- BEGIN MAP -->
+<section class="map" id="map" data-lat='58.419566' data-lng='15.603335' data-address="<strong>NILSSONS MC SHOP</strong><br>Industrigatan 46<br>582 77 Linköping" data-color="#26292E">
+</section>
+<!-- END MAP -->
 
 {% endblock %}
 
