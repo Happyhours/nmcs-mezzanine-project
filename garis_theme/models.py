@@ -28,8 +28,6 @@ class HomePage(Page, RichText):
         verbose_name = _("Home page")
         verbose_name_plural = _("Home pages")
 
-    def __str__(self):
-        return self.heading
 
 
 class AboutPage(Page, RichText):
@@ -46,8 +44,6 @@ class AboutPage(Page, RichText):
         verbose_name = _("About page")
         verbose_name_plural = _("About pages")
 
-    def __str__(self):
-        return self.heading
 
 
 class Employee(Orderable):
@@ -64,8 +60,7 @@ class Employee(Orderable):
         format="Image", max_length=255)
     aboutpage = models.ForeignKey(AboutPage)
 
-    def __str__(self):
-        return self.name
+
 
 
 class ServicesPage(Page, RichText):
@@ -86,8 +81,7 @@ class ServicesPage(Page, RichText):
         verbose_name = _("Services page")
         verbose_name_plural = _("Services pages")
 
-    def __str__(self):
-        return self.heading
+
 
 
 class Slide(Orderable):
@@ -128,9 +122,6 @@ class ContactPage(Page, RichText):
     class Meta:
         verbose_name = _("Contact page")
         verbose_name_plural = _("Contact pages")
-
-    def __str__(self):
-        return self.heading
 
 
 class ContactMap(Orderable):
@@ -185,9 +176,6 @@ class OpenTimeData(Orderable):
     time = models.CharField(max_length=50)
     sitewidecontent = models.ForeignKey(SitewideContent)  
 
-    def __str__(self):
-        return self.text + " " + self.time
-
 
 class OpenTimeAlert(Orderable):
     '''
@@ -196,18 +184,12 @@ class OpenTimeAlert(Orderable):
     text = RichTextField()
     sitewidecontent = models.ForeignKey(SitewideContent) 
 
-    def __str__(self):
-        return self.text
-
 
 class FooterContactData(Orderable):
     title = models.CharField(max_length=50)
     text = models.CharField(max_length=50)
     icon = models.CharField(max_length=20)
     sitewidecontent = models.ForeignKey(SitewideContent) 
-
-    def __str__(self):
-        return self.title
 
 
 class PortfolioPage(Page, RichText):
