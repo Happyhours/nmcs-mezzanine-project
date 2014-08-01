@@ -75,11 +75,9 @@
     {% block blog_post_list_pagecontent %}
     {% if page.get_content_model.content %}
         {% editable page.get_content_model.content %}
-        <div class="col-md-12 mg-bt-80">
-            <div class="header-content">
-                {{ page.get_content_model.content|richtext_filters|safe }}
-            </div>
-        </div>
+
+
+
         {% endeditable %}
     {% endif %}
     {% endblock %}
