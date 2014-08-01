@@ -113,8 +113,6 @@ class ServicesItem(Orderable):
     text = models.TextField(help_text="Text for service item")
     servicespage = models.ForeignKey(ServicesPage)
 
-    def __str__(self):
-        return self.heading
 
 
 class ContactPage(Page, RichText):
