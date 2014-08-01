@@ -404,6 +404,11 @@ from memcacheify import memcacheify
 CACHES = memcacheify()
 
 
+#############################
+# CUSTOM MEZZANINE SETTINGS #
+#############################
+FORMS_USE_HTML5 = True
+
 ###################
 # S3 STATIC FILES #
 ###################
