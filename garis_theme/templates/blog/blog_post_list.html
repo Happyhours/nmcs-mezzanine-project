@@ -73,13 +73,7 @@
 {% else %}
     {% if page %}
     {% block blog_post_list_pagecontent %}
-    {% if page.get_content_model.content %}
-        {% editable page.get_content_model.content %}
-
-
-
-        {% endeditable %}
-    {% endif %}
+    
     {% endblock %}
     {% endif %}
 {% endif %}
