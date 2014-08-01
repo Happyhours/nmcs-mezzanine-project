@@ -232,6 +232,10 @@ footer p {
 }
 */
 
+.custom-label {
+  display: none;
+}
+
 
 /*========================================
             MEZZANINE FORMS
