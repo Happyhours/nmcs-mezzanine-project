@@ -61,27 +61,27 @@ class ContactForm(forms.Form):
     )
 
 
-@processor_for(ContactPage)
-def author_form(request, page):
-    form = ContactForm()
-    if request.method == "POST":
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            # Form processing goes here.
-            message = "{name} / {email} said: ".format(
-                name=form.cleaned_data.get('name', ''),
-                email=form.cleaned_data.get('email', '')
-            )
-            message += "\n\n{0}".format(form.cleaned_data.get('message', ''))
-            send_mail(
-                subject=form.cleaned_data.get('subject', '').strip(),
-                message=message,
-                from_email='contact-form@myapp.com',
-                recipient_list=['jonatan.doherty.work@gmail.com'],
-            )
+# @processor_for(ContactPage)
+# def author_form(request, page):
+#     form = ContactForm()
+#     if request.method == "POST":
+#         form = ContactForm(request.POST)
+#         if form.is_valid():
+#             # Form processing goes here.
+#             message = "{name} / {email} said: ".format(
+#                 name=form.cleaned_data.get('name', ''),
+#                 email=form.cleaned_data.get('email', '')
+#             )
+#             message += "\n\n{0}".format(form.cleaned_data.get('message', ''))
+#             send_mail(
+#                 subject=form.cleaned_data.get('subject', '').strip(),
+#                 message=message,
+#                 from_email='contact-form@myapp.com',
+#                 recipient_list=['jonatan.doherty.work@gmail.com'],
+#             )
 
-            redirect = request.path + "?submitted=true"
-            return HttpResponseRedirect(redirect)
-    return {"form": form}
+#             redirect = request.path + "?submitted=true"
+#             return HttpResponseRedirect(redirect)
+#     return {"form": form}
 
 
