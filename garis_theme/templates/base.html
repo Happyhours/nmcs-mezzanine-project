@@ -122,9 +122,8 @@
                         {% for partner_image in sitewide.partnerimage_set.all %}
                         <li>
                             
-                            {% sorl_thumbnail partner_image "100x100" as im %}
-                                <img class="img-thumbnail" src="{{ im.url }}" alt="Partners"
-                                href="{{ im.link_to_image }}" alt="{{ im.link_to_image }}">
+                            {% sorl_thumbnail partner_image "200" as im %}
+                                <img class="img-thumbnail" src="{{ im.image.url }}" href="{{ im.link_to_image }}" alt="{{ im.link_to_image }}">
                             {% endthumbnail %}
 
                         </li>
@@ -138,8 +137,7 @@
                         <li>
                             
                             
-                                <img class="img-thumbnail" src="{{ partner_image.image.url }}" alt="Partners"
-                                href="{{ partner_image.link_to_image }}" alt="{{ partner_image.link_to_image }}">
+                                <img class="img-thumbnail" src="{{ partner_image.image.url }}" href="{{ partner_image.link_to_image }}" alt="{{ partner_image.link_to_image }}">
                             
 
                         </li>
@@ -221,20 +219,6 @@
                         {% endeditable %}
                     </div>
                   </div>
-                </div>
-                <div class="col-md-12">
-                    <ul class="client-slider">
-                        {% for partner_image in sitewide.partnerimage_set.all %}
-                        <li>
-                            
-                            {% sorl_thumbnail partner_image "100x100" as im %}
-                                <img class="img-thumbnail" src="{{ im.image.url }}" alt="Partners"
-                                href="{{ im.link_to_image }}" alt="{{ im.link_to_image }}">
-                            {% endthumbnail %}
-
-                        </li>
-                        {% endfor %}
-                    </ul>
                 </div>
                 <!--
                 <div class="col-md-12">
