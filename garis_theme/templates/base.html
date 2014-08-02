@@ -197,8 +197,8 @@
                         <li>
                             
                             {% sorl_thumbnail partner_image "100x100" as im %}
-                                <img class="img-thumbnail" src="{{ im.url }}" alt="Partners"
-                                href="{{ im.link }}" alt="{{ im.link }}">
+                                <img class="img-thumbnail" src="{{ im.image.url }}" alt="Partners"
+                                href="{{ im.link_to_image }}" alt="{{ im.link_to_image }}">
                             {% endthumbnail %}
 
                         </li>
