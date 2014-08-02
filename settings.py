@@ -525,6 +525,18 @@ LOGGING = {
 # # The next line is not required, but may be useful. 
 # SEND_BROKEN_LINK_EMAILS = True
 
+#
+# SENDGRID - https://sendgrid.com/docs/Integrate/Frameworks/django.html
+# 
+
+# Default sendgrid settings
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = os.environ.get("SENDGRID_USERNAME", "")
+EMAIL_HOST_PASSWORD = os.environ.get("SENDGRID_PASSWORD", "")
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+
 ##################
 # LOCAL SETTINGS #
 ##################
