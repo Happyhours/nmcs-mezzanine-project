@@ -407,8 +407,8 @@ FORMS_USE_HTML5 = True
 # A boolean that turns on/off debug mode. When set to ``True``, stack traces
 # are displayed for error pages. Should always be set to ``False`` in
 # production. Best set to ``True`` in local_settings.py
-#DEBUG = False
-DEBUG = os.environ.get("DEBUG", "")
+DEBUG = False
+
 
 ###################
 # S3 STATIC FILES #
