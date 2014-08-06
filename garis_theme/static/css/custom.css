@@ -9,12 +9,14 @@
 /*========================================
             Collapsed navbar settings so content is not hidden 
 ==========================================*/
+/* TODO
 .dpSmall #sidebar .navbar, .dpXsmall #sidebar .navbar {
   padding-top: 10px;
 }
 .navbar {
   margin-bottom: 10px;
 }
+*/
 
 /* -------------------------------------------------------- */
 
@@ -27,10 +29,11 @@
     color: #FFF;
     line-height: 1.2;
 }
-
+/* TODO
 .navbar-brand {
     height: 110px;
 }
+*/
 
 /* HOMEPAGE CSS */
 
