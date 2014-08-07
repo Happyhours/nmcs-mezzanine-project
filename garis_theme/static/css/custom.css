@@ -1,7 +1,10 @@
 /*========================================
-            Custom Media settings 
+    Set minimum height of sections so no 
+    white background is shown if there is not enough content on page. 
 ==========================================*/
-
+#container section {
+  min-height: 670px;
+}
 
 /* -------------------------------------------------------- */
 
