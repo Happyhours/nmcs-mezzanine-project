@@ -129,7 +129,7 @@
     {% endif %}
     {% endwith %}
     {% blocktrans with sometime=blog_post.publish_date|timesince %}
-        <span class="dates">{{ sometime }} ago </span>
+        <span class="dates">{{ sometime }} sedan </span>
     {% endblocktrans %}
 </div>
 {% endeditable %}
@@ -158,7 +158,7 @@
     </ul>
     {% endif %}
     <p>
-        <a class="btn btn-dark medium" href="{{ blog_post.get_absolute_url }}">{% trans "read more" %}</a>
+        <a class="btn btn-dark medium" href="{{ blog_post.get_absolute_url }}">{% trans "läs mer" %}</a>
     </p>
 </div>
 {% endblock %}
