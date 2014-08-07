@@ -13,6 +13,65 @@
 
 
 /*========================================
+    Set minimum height of sections so no 
+    white background is shown if there is not enough content on page. 
+==========================================*/
+/* 
+@media (min-width: 768px) {
+  #container section .row {
+    margin-top: 400px;
+  }
+}
+
+
+@media (min-width: 992px) {
+  #container section .row {
+    margin-top: 0px;
+  }
+}
+
+@media (max-width: 767px) {
+  #container section .row {
+    margin-top: 0px;
+  }
+}
+-------------------------------------------------------- */
+
+/*
+Commented out following section starting at lines below
+- 3671
+- 3784
+- 3821
+Then added this custom media setting
+*/
+@media (min-width: 768px) {
+  .navbar-nav .open .dropdown-menu {
+    position: static;
+    float: none;
+    width: auto;
+    margin-top: 0;
+    background-color: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+  .navbar-nav .open .dropdown-menu > li > a,
+  .navbar-nav .open .dropdown-menu .dropdown-header {
+    padding: 5px 15px 5px 25px;
+  }
+  .navbar-nav .open .dropdown-menu > li > a {
+    line-height: 20px;
+  }
+  .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar-nav .open .dropdown-menu > li > a:focus {
+    background-image: none;
+  }
+}
+
+
+
+
+
+/*========================================
             Collapsed navbar settings so content is not hidden 
 ==========================================*/
 
