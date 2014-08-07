@@ -6,6 +6,9 @@
   min-height: 670px;
 }
 
+#container section#map {
+  min-height: 450px;
+}
 /* -------------------------------------------------------- */
 
 
