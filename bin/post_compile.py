@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-# Uninstall filebrowser-safe to allow S3
-pip uninstall -y filebrowser-safe
