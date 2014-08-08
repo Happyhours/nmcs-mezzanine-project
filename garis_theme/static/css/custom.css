@@ -37,6 +37,22 @@
 }
 /* -------------------------------------------------------- */
 
+/*========================================
+    Change size of logo-name to rezise and 
+    fit when looking in mobile mode.
+==========================================*/
+
+@media (max-width: 767px) {
+  .navbar-brand {
+    height: 50px;
+  }
+  .company-name {
+    font-size: 13px;
+  }
+}
+
+/* -------------------------------------------------------- */
+
 /*
 Commented out following section starting at lines below
 - 3671
