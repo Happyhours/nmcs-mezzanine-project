@@ -43,8 +43,8 @@ Commented out following section starting at lines below
 - 3784
 - 3821
 Then added this custom media setting
-*/
-@media (min-width: 768px) {
+
+@media (max-width: 991px) {
   .navbar-nav .open .dropdown-menu {
     position: static;
     float: none;
@@ -66,8 +66,53 @@ Then added this custom media setting
     background-image: none;
   }
 }
+*/
 
+@media (min-width: 992px) {
+  .navbar-collapse {
+    width: auto;
+    border-top: 0;
+    box-shadow: none;
+  }
+  .navbar-collapse.collapse {
+    display: block !important;
+    height: auto !important;
+    padding-bottom: 0;
+    overflow: visible !important;
+  }
+  .navbar-collapse.in {
+    overflow-y: visible;
+  }
+  .navbar-fixed-top .navbar-collapse,
+  .navbar-static-top .navbar-collapse,
+  .navbar-fixed-bottom .navbar-collapse {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
 
+@media (min-width: 992px) {
+  .navbar-toggle {
+    display: none;
+  }
+}
+
+@media (min-width: 992px) {
+  .navbar-nav {
+    float: left;
+    margin: 0;
+  }
+  .navbar-nav > li {
+    float: left;
+  }
+  .navbar-nav > li > a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+  .navbar-nav.navbar-right:last-child {
+    margin-right: -15px;
+  }
+}
 
 
 
@@ -105,6 +150,7 @@ Then added this custom media setting
 .feature-image-wrapper {
     max-height: 500px;
     max-width: 500px;
+    margin-top: 20px;
 }
 
 /* FOOTER CSS */
