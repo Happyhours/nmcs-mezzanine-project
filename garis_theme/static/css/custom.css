@@ -66,7 +66,7 @@ Then added this custom media setting
     background-image: none;
   }
 }
-*/
+
 
 @media (min-width: 992px) {
   .navbar-collapse {
@@ -113,7 +113,7 @@ Then added this custom media setting
     margin-right: -15px;
   }
 }
-
+*/
 
 
 /*========================================
