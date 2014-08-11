@@ -6,7 +6,8 @@
 {% load thumbnail from sorl.thumbnail as sorl_thumbnail %}
 
 {% block canonical_url %}
- {{ page.html_id }}
+ {{ page.html_id }} Ö {{ page.get_absolute_url }}
+ Ö {{ page.title }} Ö {{ page.id }} Ö {{ page.parent_id }}
 {% endblock %}
 
 
