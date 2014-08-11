@@ -24,6 +24,9 @@
 <li class="active">{{ blog_post.title }}</li>
 {% endblock %}
 
+<link rel="canonical" href="http://www.nilssonsmcshop.se{{ blog_post.get_absolute_url }}">
+
+{{ blog_post.get_absolute_url }}
 
 {% block main %}
 
