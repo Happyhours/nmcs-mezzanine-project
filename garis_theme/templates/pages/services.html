@@ -6,7 +6,7 @@
 {% load thumbnail from sorl.thumbnail as sorl_thumbnail %}
 
 {% block canonical_url %}
- {{ page.get_absolute_url }}
+ {{ page.html_id }}
 {% endblock %}
 
 
