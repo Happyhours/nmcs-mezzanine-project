@@ -2,6 +2,8 @@
 
 {% load mezzanine_tags %}
 
+{% block canonical_url %}{{ page.html_id }}/{% endblock %}
+
 {% block main %}
 {{ block.super }}
 
