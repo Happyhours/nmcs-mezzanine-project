@@ -6,13 +6,12 @@
 {% load thumbnail from sorl.thumbnail as sorl_thumbnail %}
 
 {% block canonical_url %}
- {{ page.html_id }} Ö {{ page.get_absolute_url }}
-
+    {{ page.html_id }}/
 {% endblock %}
 
 
 {% block main %}
-{{ page.html_id }} Ö {{ page.get_absolute_url }}
+
 <!-- BEGIN SERVICES -->
 <section id="services" class="services">
     <div class="row">
